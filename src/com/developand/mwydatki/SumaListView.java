@@ -1,18 +1,13 @@
 package com.developand.mwydatki;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
-import com.developand.mwydatki.data.MonthBill;
-import com.developand.mwydatki.data.OperationEntry;
+import com.developand.mwydatki.data.common.OperationType;
 
 public class SumaListView extends ListActivity {
 
@@ -23,23 +18,14 @@ public class SumaListView extends ListActivity {
 
 		super.onCreate(savedInstanceState);
 
-		DataReader dr = new DataReaderImpl();
-
-		String readData;
 		try {
-			readData = dr.readData().values().toArray()[0].toString();
 
-			MonthBill mb = MonthBill.getInstance();
-			mb.parseSource(readData);
-
-			List<String> listaWydatkow = new ArrayList<String>();
-			for (OperationEntry op : mb.getOperations()) {
-				listaWydatkow.add(op.toString());
-				Log.v(TAG, op.toString());
-			}
+			DataReader dr = new DataReaderImpl();
+			dr.readData();
 
 			setListAdapter(new ArrayAdapter<String>(this,
-					android.R.layout.simple_list_item_1, listaWydatkow));
+					android.R.layout.simple_list_item_1,
+					dr.getOperationsStringByIndex(0, OperationType.ALL)));
 			getListView().setTextFilterEnabled(true);
 
 		} catch (IOException e) {
