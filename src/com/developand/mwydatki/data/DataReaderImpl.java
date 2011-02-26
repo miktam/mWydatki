@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.developand.mwydatki.data.common.OperationType;
+
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -40,12 +42,11 @@ public class DataReaderImpl implements DataReader {
 	public Map<String, Spanned> readData() throws IOException {
 
 		// mimic singleton
-		if (mapFileData != null)
-		{
+		if (mapFileData != null) {
 			Log.v(TAG, "no need to read files again");
 			return mapFileData;
 		}
-		
+
 		Log.v(TAG, "starting reading file");
 
 		// mimic singleton here
@@ -67,6 +68,7 @@ public class DataReaderImpl implements DataReader {
 			Log.v(TAG, "found file:" + file);
 			Spanned parsedData = Html.fromHtml(read(directory + file));
 			mapFileData.put(file, parsedData);
+			Log.v(TAG, "parsed this file");
 		}
 
 		Log.v(TAG, "found spanned lists #:" + mapFileData.size());
@@ -94,6 +96,42 @@ public class DataReaderImpl implements DataReader {
 		if (mapFileData != null)
 			return mapFileData.keySet();
 		return null;
+	}
+
+	public List<OperationEntry> getOperations(String file) {
+		MonthBill mb = MonthBill.getInstance();
+		mb.parseSource(mapFileData.get(file).toString());
+		return mb.getOperations();
+	}
+
+	public List<String> getOperationsString(String file, OperationType type) {
+		MonthBill mb = MonthBill.getInstance();
+		mb.parseSource(mapFileData.get(file).toString());
+		List<String> opsString = new ArrayList<String>();
+		for (OperationEntry op : mb.getOperations()) {
+			switch (type) {
+			case ALL:
+				opsString.add(op.toString());
+				break;
+			case MINUS:
+				if (op.getKwotaOperacji() < 0)
+					opsString.add(op.toString());
+			case PLUS:
+				if (op.getKwotaOperacji() >= 0)
+					opsString.add(op.toString());
+			}
+		}
+		return opsString;
+	}
+
+	public List<String> getOperationsStringByIndex(Integer index,
+			OperationType type) {
+		List<String> ops = new ArrayList<String>();
+		
+		if (getFiles().size() <= index)
+			return null;
+		
+		return getOperationsString(getFiles().toArray()[index].toString(), type);
 	}
 
 }
