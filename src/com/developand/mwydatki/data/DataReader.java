@@ -18,5 +18,6 @@ public interface DataReader {
 	List<String> getOperationsFromFileByType(String file, OperationType type);
 	List<String> getOperationsStringByIndex(Integer index, OperationType type);
 	List<String> getOperationsFromStringByType(String source, OperationType type);
+	List<String> getCurrentLoadedOperations(OperationType type);
 
 }
