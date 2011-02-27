@@ -12,9 +12,11 @@ import android.text.Spanned;
 public interface DataReader {
 	
 	Map<String, Spanned> readData() throws IOException;
+	
 	Set<String> getFiles();
 	List<OperationEntry> getOperations(String file);
-	List<String> getOperationsString(String file, OperationType type);
+	List<String> getOperationsFromFileByType(String file, OperationType type);
 	List<String> getOperationsStringByIndex(Integer index, OperationType type);
+	List<String> getOperationsFromStringByType(String source, OperationType type);
 
 }

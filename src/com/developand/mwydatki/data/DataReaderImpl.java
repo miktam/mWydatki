@@ -64,7 +64,7 @@ public class DataReaderImpl implements DataReader {
 		Log.v(TAG, "found files #:" + files.size());
 
 		for (String file : files) {
-			File f = new File(directory, file);
+			//File f = new File(directory, file);
 			Log.v(TAG, "found file:" + file);
 			Spanned parsedData = Html.fromHtml(read(directory + file));
 			mapFileData.put(file, parsedData);
@@ -77,6 +77,8 @@ public class DataReaderImpl implements DataReader {
 
 	}
 
+	// TODO add parsing only EKONTO ...
+	// TODO add handling lack of access to sd card
 	private String read(String fileName) throws IOException {
 
 		StringBuilder text = new StringBuilder();
@@ -104,7 +106,7 @@ public class DataReaderImpl implements DataReader {
 		return mb.getOperations();
 	}
 
-	public List<String> getOperationsString(String file, OperationType type) {
+	public List<String> getOperationsFromFileByType(String file, OperationType type) {
 		MonthBill mb = MonthBill.getInstance();
 		mb.parseSource(mapFileData.get(file).toString());
 		List<String> opsString = new ArrayList<String>();
@@ -131,7 +133,28 @@ public class DataReaderImpl implements DataReader {
 		if (getFiles().size() <= index)
 			return null;
 		
-		return getOperationsString(getFiles().toArray()[index].toString(), type);
+		return getOperationsFromFileByType(getFiles().toArray()[index].toString(), type);
+	}
+
+	public List<String> getOperationsFromStringByType(String source,
+			OperationType type) {
+		MonthBill mb = MonthBill.getInstance();
+		mb.parseSource(source);
+		List<String> opsString = new ArrayList<String>();
+		for (OperationEntry op : mb.getOperations()) {
+			switch (type) {
+			case ALL:
+				opsString.add(op.toString());
+				break;
+			case MINUS:
+				if (op.getKwotaOperacji() < 0)
+					opsString.add(op.toString());
+			case PLUS:
+				if (op.getKwotaOperacji() >= 0)
+					opsString.add(op.toString());
+			}
+		}
+		return opsString;
 	}
 
 }
