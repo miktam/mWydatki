@@ -25,6 +25,11 @@ public class DataReaderImpl implements DataReader {
 	private static final String TAG = "DataReader";
 
 	private static Map<String, Spanned> mapFileData = null;
+	
+	
+	private static List<String> currentOperationsAll = new ArrayList<String>();
+	private static List<String> currentOperationsPlus = new ArrayList<String>();
+	private static List<String> currentOperationsMinus = new ArrayList<String>();
 
 	/**
 	 * @param path
@@ -136,6 +141,7 @@ public class DataReaderImpl implements DataReader {
 		return getOperationsFromFileByType(getFiles().toArray()[index].toString(), type);
 	}
 
+	// used in attachment reading
 	public List<String> getOperationsFromStringByType(String source,
 			OperationType type) {
 		MonthBill mb = MonthBill.getInstance();
@@ -155,6 +161,11 @@ public class DataReaderImpl implements DataReader {
 			}
 		}
 		return opsString;
+	}
+
+	public List<String> getCurrentLoadedOperations(OperationType type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

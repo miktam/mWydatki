@@ -13,7 +13,6 @@ import com.developand.mwydatki.tools.Converter;
 public class MonthBill {
 
 	private static final String TAG = "MonthBill";
-	private static boolean initialized = false;
 	String month;
 	int year;
 	Double saldoPoczatkowe;
@@ -67,9 +66,6 @@ public class MonthBill {
 
 	public void parseSource(String source) {
 
-		if (initialized)
-			return;
-
 		Scanner s = new Scanner(source);
 		parseMonthYear(s);
 		// s.skip("Elektroniczne zestawienie operacji za");
@@ -81,8 +77,6 @@ public class MonthBill {
 		parseEachOperation(s);
 
 		normalizeOperationDates(firstDate);
-
-		initialized = true;
 
 		// System.out.println(this);
 
