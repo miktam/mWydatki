@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 import android.util.Log;
 
+import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.tools.Converter;
 
-public class MonthBill {
+public class MonthBillData {
 
 	private static final String TAG = "MonthBill";
 	String month;
@@ -22,10 +23,10 @@ public class MonthBill {
 	List<OperationEntry> opsListInPlus = null;
 	List<OperationEntry> opsListInMinus = null;
 
-	private static MonthBill INSTANCE = null;
+	private static MonthBillData INSTANCE = null;
 
 	public List<OperationEntry> getOperations() {
-		//Log.v(TAG, "amount of operations = " + opsList.size());
+		// Log.v(TAG, "amount of operations = " + opsList.size());
 		return opsList;
 	}
 
@@ -54,12 +55,12 @@ public class MonthBill {
 		this.saldoKoncowe = Converter.toDouble(st[st.length - 1]);
 	}
 
-	private MonthBill() {
+	private MonthBillData() {
 	}
 
-	public static MonthBill getInstance() {
+	public static MonthBillData getInstance() {
 		if (null == INSTANCE)
-			INSTANCE = new MonthBill();
+			INSTANCE = new MonthBillData();
 
 		return INSTANCE;
 	}
@@ -175,12 +176,14 @@ public class MonthBill {
 
 					// add date to the end of the string
 					sb.append(" 01-07-2009");
-					this.addOperationEntry(new OperationEntry(sb.toString(), mainTitle));
+					this.addOperationEntry(new OperationEntry(sb.toString(),
+							mainTitle));
 					setSaldoKoncowe(line);
 					break;
 				}
 
-				this.addOperationEntry(new OperationEntry(whole.toString(), mainTitle));
+				this.addOperationEntry(new OperationEntry(whole.toString(),
+						mainTitle));
 			}
 		}
 	}
@@ -237,5 +240,21 @@ public class MonthBill {
 		}
 
 		return opsListInMinus;
+	}
+
+	public List<OperationEntry> getOperationsByType(OperationType opType) {
+		List<OperationEntry> toReturn = null;
+		switch (opType) {
+		case ALL:
+			toReturn = opsList;
+			break;
+		case MINUS:
+			toReturn = getOperationsInMinus();
+			break;
+		case PLUS:
+			toReturn = getOperationsInPlus();
+			break;
+		}
+		return toReturn;
 	}
 }

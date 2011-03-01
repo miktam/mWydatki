@@ -106,13 +106,13 @@ public class DataReaderImpl implements DataReader {
 	}
 
 	public List<OperationEntry> getOperations(String file) {
-		MonthBill mb = MonthBill.getInstance();
+		MonthBillData mb = MonthBillData.getInstance();
 		mb.parseSource(mapFileData.get(file).toString());
 		return mb.getOperations();
 	}
 
 	public List<String> getOperationsFromFileByType(String file, OperationType type) {
-		MonthBill mb = MonthBill.getInstance();
+		MonthBillData mb = MonthBillData.getInstance();
 		mb.parseSource(mapFileData.get(file).toString());
 		List<String> opsString = new ArrayList<String>();
 		for (OperationEntry op : mb.getOperations()) {
@@ -144,7 +144,7 @@ public class DataReaderImpl implements DataReader {
 	// used in attachment reading
 	public List<String> getOperationsFromStringByType(String source,
 			OperationType type) {
-		MonthBill mb = MonthBill.getInstance();
+		MonthBillData mb = MonthBillData.getInstance();
 		mb.parseSource(source);
 		List<String> opsString = new ArrayList<String>();
 		for (OperationEntry op : mb.getOperations()) {
@@ -163,9 +163,11 @@ public class DataReaderImpl implements DataReader {
 		return opsString;
 	}
 
-	public List<String> getCurrentLoadedOperations(OperationType type) {
-		// TODO Auto-generated method stub
-		return null;
+public List<OperationEntry> getOperationsByIndex(Integer index,
+			OperationType op) {
+		MonthBillData mb = MonthBillData.getInstance();
+		mb.parseSource(mapFileData.values().toArray()[0].toString());
+		return mb.getOperationsByType(op);
 	}
 
 }
