@@ -9,7 +9,10 @@ import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
 import com.developand.mwydatki.data.common.OperationType;
 
-public class DochodyListView extends ListActivity {
+public class AllExpensesView extends ListActivity {
+
+	private static final String TAG = "SumaListView";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -22,7 +25,7 @@ public class DochodyListView extends ListActivity {
 
 			setListAdapter(new ArrayAdapter<String>(this,
 					android.R.layout.simple_list_item_1,
-					dr.getOperationsStringByIndex(0, OperationType.PLUS)));
+					dr.getOperationsStringByIndex(0, OperationType.ALL)));
 			getListView().setTextFilterEnabled(true);
 
 		} catch (IOException e) {

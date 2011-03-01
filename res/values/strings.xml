@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, Main!</string>
     <string name="app_name">mwydatki</string>
+    <string name="no_items">nie ma nic</string>
 </resources>
