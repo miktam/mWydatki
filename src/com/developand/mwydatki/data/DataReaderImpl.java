@@ -46,12 +46,6 @@ public class DataReaderImpl implements DataReader {
 	 */
 	public Map<String, Spanned> readData() throws IOException {
 
-		// mimic singleton
-		if (mapFileData != null) {
-			Log.v(TAG, "no need to read files again");
-			return mapFileData;
-		}
-
 		Log.v(TAG, "starting reading file");
 
 		// mimic singleton here

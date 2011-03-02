@@ -45,8 +45,11 @@ public class BillsView extends ListActivity {
 		};
 		Thread thread = new Thread(null, viewOrders, "MagentoBackground");
 		thread.start();
+		
+		String converting = this.getString(R.string.converting);
+		String wait = this.getString(R.string.please_wait);
 		m_ProgressDialog = ProgressDialog.show(BillsView.this,
-				"Please wait...", "Retrieving data ...", true);
+				wait, converting, true);
 	}
 
 	private Runnable returnRes = new Runnable() {
