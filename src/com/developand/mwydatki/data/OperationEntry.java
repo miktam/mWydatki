@@ -1,7 +1,7 @@
 package com.developand.mwydatki.data;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Locale;
 
 import com.developand.mwydatki.tools.Converter;
 
@@ -18,9 +18,8 @@ public class OperationEntry {
 	public String toString() {
 		return "" + getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
 				+ getDataOperacji().get(Calendar.MONTH) + "/"
-				+ getDataOperacji().get(Calendar.YEAR) + "\n"
-				+ getMainTitle() + "\n"
-				+ getOpisOperacji() + "\n" + getKwotaOperacji();
+				+ getDataOperacji().get(Calendar.YEAR) + "\n" + getMainTitle()
+				+ "\n" + getOpisOperacji() + "\n" + getKwotaOperacji();
 	}
 
 	public OperationEntry(String fullOpis, String mainTitle) {
@@ -48,17 +47,31 @@ public class OperationEntry {
 
 	}
 
-	public String getMainTitle()
-	{
-		String [] all = mainTitle.split(" ");
+	public String getMainTitle() {
+		String[] all = mainTitle.split(" ");
 		StringBuffer clean = new StringBuffer();
-		for (int i = 1; i<all.length; i++)
+		for (int i = 1; i < all.length; i++)
 			clean.append(all[i] + " ");
 		return clean.toString();
 	}
-	
+
 	public Calendar getDataOperacji() {
 		return dataOperacji;
+	}
+
+	public String getDataOperacjiFormatted() {
+		StringBuilder date = new StringBuilder();
+		date.append(getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
+				+ getDataOperacji().get(Calendar.MONTH) + "/");
+
+		StringBuilder year = new StringBuilder();
+		year.append(getDataOperacji().get(Calendar.YEAR) - 2000);
+		if (year.length() == 1)
+			year.insert(0, "0");
+
+		date.append(year);
+
+		return date.toString();
 	}
 
 	public void setDataOperacji(Calendar dataOperacji) {
