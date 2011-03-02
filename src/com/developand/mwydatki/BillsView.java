@@ -2,7 +2,6 @@ package com.developand.mwydatki;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -24,71 +23,69 @@ import com.developand.mwydatki.data.common.OperationType;
 public class BillsView extends ListActivity {
 
 	private static final String TAG = "BillView";
-	private ProgressDialog m_ProgressDialog = null;
+	private ProgressDialog progressDialog = null;
 	private List<OperationEntry> operations = null;
-	private OrderAdapter m_adapter;
-	private Runnable viewOrders;
+	private OperationEntryAdapter opEntryAdapter;
+	private Runnable dataReader;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		operations = new ArrayList<OperationEntry>();
-		this.m_adapter = new OrderAdapter(this, R.layout.row, operations);
-		setListAdapter(this.m_adapter);
+		this.opEntryAdapter = new OperationEntryAdapter(this, R.layout.row,
+				operations);
+		setListAdapter(this.opEntryAdapter);
 
-		viewOrders = new Runnable() {
+		dataReader = new Runnable() {
 
 			public void run() {
-				getOrders();
+				downloadData();
 			}
 		};
-		Thread thread = new Thread(null, viewOrders, "MagentoBackground");
+		Thread thread = new Thread(null, dataReader, "MagentoBackground");
 		thread.start();
-		
+
 		String converting = this.getString(R.string.converting);
 		String wait = this.getString(R.string.please_wait);
-		m_ProgressDialog = ProgressDialog.show(BillsView.this,
-				wait, converting, true);
+		progressDialog = ProgressDialog.show(BillsView.this, wait, converting,
+				true);
 	}
 
 	private Runnable returnRes = new Runnable() {
 
 		public void run() {
 			if (operations != null && operations.size() > 0) {
-				m_adapter.notifyDataSetChanged();
+				opEntryAdapter.notifyDataSetChanged();
 				for (int i = 0; i < operations.size(); i++)
-					m_adapter.add(operations.get(i));
+					opEntryAdapter.add(operations.get(i));
 			}
-			m_ProgressDialog.dismiss();
-			m_adapter.notifyDataSetChanged();
+			progressDialog.dismiss();
+			opEntryAdapter.notifyDataSetChanged();
 		}
 	};
 
-	private void getOrders() {
+	private void downloadData() {
 
 		DataReader dr = new DataReaderImpl();
 		try {
 			dr.readData();
-			operations = dr.getOperationsByIndex(0, OperationType.ALL);
-			
+			operations = dr.getSortedOperationsByIndex(0, OperationType.ALL);
+
 			Log.v(TAG, "size = " + operations.size());
-			
+
 			runOnUiThread(returnRes);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
-
 	}
 
-	private class OrderAdapter extends ArrayAdapter<OperationEntry> {
+	private class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 
 		private List<OperationEntry> items;
 
-		public OrderAdapter(Context context, int textViewResourceId,
+		public OperationEntryAdapter(Context context, int textViewResourceId,
 				List<OperationEntry> items) {
 			super(context, textViewResourceId, items);
 			this.items = items;
@@ -105,23 +102,41 @@ public class BillsView extends ListActivity {
 			if (o != null) {
 				TextView saldo = (TextView) v.findViewById(R.id.icon);
 				TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
-				TextView descrOpOperation = (TextView) v.findViewById(R.id.opis);
+				TextView descrOpOperation = (TextView) v
+						.findViewById(R.id.opis);
 				TextView date = (TextView) v.findViewById(R.id.date);
 
-				if (mainTitle != null) {
-					mainTitle.setText(o.getMainTitle());
-				}
-				if (descrOpOperation != null) {
-					descrOpOperation.setText(o.getOpisOperacji());
-				}
-				if (null != saldo)
-				{
-					saldo.setText("" + o.getKwotaOperacji());
-				}
-				
-				if (null != date)
-				{
-					date.setText(o.getDataOperacjiFormatted());
+				if (o.isCategory()) {
+					if (null != mainTitle) {
+						mainTitle.setText(o.getMainTitle());
+					}
+					if (null != descrOpOperation) {
+						descrOpOperation.setText("");
+					}
+					if (null != saldo) {
+						saldo.setText("" + o.getKwotaOperacji());
+					}
+
+					if (null != date) {
+						date.setText("");
+					}
+					
+				} else {
+
+					if (null != mainTitle) {
+						mainTitle.setText(o.getMainTitle());
+					}
+					if (null != descrOpOperation) {
+						descrOpOperation.setText(o.getOpisOperacji());
+					}
+					if (null != saldo) {
+						saldo.setText("" + o.getKwotaOperacji());
+					}
+
+					if (null != date) {
+						date.setText(o.getDataOperacjiFormatted());
+					}
+
 				}
 			}
 			return v;
