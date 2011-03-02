@@ -69,7 +69,6 @@ public class MonthBillData {
 
 		Scanner s = new Scanner(source);
 		parseMonthYear(s);
-		// s.skip("Elektroniczne zestawienie operacji za");
 
 		setSaldoPoczatkowe(parseSaldoPoczatkowe(s));
 
@@ -78,8 +77,6 @@ public class MonthBillData {
 		parseEachOperation(s);
 
 		normalizeOperationDates(firstDate);
-
-		// System.out.println(this);
 
 	}
 
@@ -147,14 +144,14 @@ public class MonthBillData {
 	 */
 	private void parseEachOperation(Scanner s) {
 		String line = new String();
-		String mainTitle = new String();
+		StringBuffer mainTitle = new StringBuffer();
 		while (s.hasNextLine()) {
 			if (line.equals(""))
 				line = s.nextLine();
 
 			if (line.matches("[0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9][0-9][0-9] .*")) {
 				StringBuffer whole = new StringBuffer(line);
-				mainTitle = line;
+				mainTitle = new StringBuffer(line);
 				line = s.nextLine();
 				// replace with do while
 				while (s.hasNextLine()
@@ -177,13 +174,13 @@ public class MonthBillData {
 					// add date to the end of the string
 					sb.append(" 01-07-2009");
 					this.addOperationEntry(new OperationEntry(sb.toString(),
-							mainTitle));
+							mainTitle.toString()));
 					setSaldoKoncowe(line);
 					break;
 				}
 
 				this.addOperationEntry(new OperationEntry(whole.toString(),
-						mainTitle));
+						mainTitle.toString()));
 			}
 		}
 	}
