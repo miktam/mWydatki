@@ -28,7 +28,7 @@
 
 		<activity android:name="AllExpensesView"></activity>
 		<activity android:name="IncomeView"></activity>
-		<activity android:name="BillsView"></activity>
+		<activity android:name="BillsView" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		<activity android:name="AttachmentReader">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
