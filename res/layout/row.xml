@@ -6,7 +6,7 @@ android:background="#d3d3d3"
 
 	>
 
-	<TextView android:id="@+id/icon" android:layout_width="46dip"
+	<TextView android:id="@+id/icon" android:layout_width="50dip"
 		android:layout_height="fill_parent" android:layout_alignParentTop="true"
 		android:layout_alignParentBottom="true" android:layout_marginRight="2dip"
 
