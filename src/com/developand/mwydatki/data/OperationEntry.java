@@ -12,34 +12,39 @@ public class OperationEntry {
 	Double saldoPoOperacji;
 	Double kwotaOperacji;
 	String mainTitle;
+	private boolean isCategory;
 
 	@Override
 	public String toString() {
-		return getDataOperacjiFormatted() + "\n" + getMainTitle()
-				+ "\n" + getOpisOperacji() + "\n" + getKwotaOperacji();
+		return getDataOperacjiFormatted() + "\n" + getMainTitle() + "\n"
+				+ getOpisOperacji() + "\n" + getKwotaOperacji();
 	}
 
 	public OperationEntry(String fullOpis, String mainTitle) {
 
-		String[] ops = fullOpis.split(" ");
-		StringBuilder opis = new StringBuilder();
-		String dataKsiegowania = ops[0];
-		String saldoPoOp = ops[ops.length - 2];
-		String kwota = ops[ops.length - 3];
-		String dataOperacji = ops[ops.length - 1];
-
-		this.kwotaOperacji = Converter.toDouble(kwota);
-		this.saldoPoOperacji = Converter.toDouble(saldoPoOp);
-		this.dataKsiegowania = Converter.toCalendar(dataKsiegowania);
-		this.dataOperacji = Converter.toCalendar(dataOperacji);
 		this.mainTitle = mainTitle;
 
-		for (int i = 1; i < ops.length - 3; i++) {
+		String[] ops = fullOpis.split(" ");
 
-			opis.append(ops[i] + " ");
+		if (ops.length > 2) {
+			StringBuilder opis = new StringBuilder();
+			String dataKsiegowania = ops[0];
+			String saldoPoOp = ops[ops.length - 2];
+			String kwota = ops[ops.length - 3];
+			String dataOperacji = ops[ops.length - 1];
+
+			this.kwotaOperacji = Converter.toDouble(kwota);
+			this.saldoPoOperacji = Converter.toDouble(saldoPoOp);
+			this.dataKsiegowania = Converter.toCalendar(dataKsiegowania);
+			this.dataOperacji = Converter.toCalendar(dataOperacji);
+
+			for (int i = 1; i < ops.length - 3; i++) {
+
+				opis.append(ops[i] + " ");
+			}
+
+			this.opisOperacji = opis.toString();
 		}
-
-		this.opisOperacji = opis.toString();
 
 	}
 
@@ -104,6 +109,14 @@ public class OperationEntry {
 
 	public void setKwotaOperacji(Double kwotaOperacji) {
 		this.kwotaOperacji = kwotaOperacji;
+	}
+
+	public void setCategory(boolean isCategory) {
+		this.isCategory = isCategory;
+	}
+
+	public boolean isCategory() {
+		return isCategory;
 	}
 
 }

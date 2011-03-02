@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class Converter {
 
+	/**
+	 * Converter from string to double
+	 * @param toConv - string to convert
+	 * @return converted value
+	 */
 	public static Double toDouble(String toConv) {
 		String replacedDots = toConv.replace(".", "");
 		String replacedCommas = replacedDots.replace(",", ".");
