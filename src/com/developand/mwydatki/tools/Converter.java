@@ -1,7 +1,5 @@
 package com.developand.mwydatki.tools;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,11 +34,7 @@ public class Converter {
 
 	public static Calendar toCalendar(String dataKsiegowania) {
 		Calendar cal =  Calendar.getInstance();
-		String [] date = dataKsiegowania.split("-");
-		if (date == null || date.length <3)
-		{
-			System.out.println("debug here");
-		}
+		String [] date = dataKsiegowania.split("-");		
 		cal.set(Integer.valueOf(date[2]), Integer.valueOf(date[1]), Integer.valueOf(date[0]));
 		return cal;
 	}

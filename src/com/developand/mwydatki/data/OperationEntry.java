@@ -1,7 +1,6 @@
 package com.developand.mwydatki.data;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 import com.developand.mwydatki.tools.Converter;
 
@@ -16,14 +15,11 @@ public class OperationEntry {
 
 	@Override
 	public String toString() {
-		return "" + getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
-				+ getDataOperacji().get(Calendar.MONTH) + "/"
-				+ getDataOperacji().get(Calendar.YEAR) + "\n" + getMainTitle()
+		return getDataOperacjiFormatted() + "\n" + getMainTitle()
 				+ "\n" + getOpisOperacji() + "\n" + getKwotaOperacji();
 	}
 
 	public OperationEntry(String fullOpis, String mainTitle) {
-		// 31-07-2009 ZAKUP PRZY
 
 		String[] ops = fullOpis.split(" ");
 		StringBuilder opis = new StringBuilder();
