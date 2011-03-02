@@ -118,9 +118,7 @@ public class BillsView extends ListActivity {
 				
 				if (null != date)
 				{
-					date.setText( "" + o.getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
-							+ o.getDataOperacji().get(Calendar.MONTH) + "/"
-							+ (o.getDataOperacji().get(Calendar.YEAR) - 2000));
+					date.setText(o.getDataOperacjiFormatted());
 				}
 			}
 			return v;
