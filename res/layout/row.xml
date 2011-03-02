@@ -1,33 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip">
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_marginRight="6dip"
-        android:src="@drawable/icon" />
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dip"
-        android:layout_weight="1"
-        android:layout_height="fill_parent">
-        <TextView
-            android:id="@+id/toptext"
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-        />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:id="@+id/bottomtext"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-        />
-    </LinearLayout>
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="?android:attr/listPreferredItemHeight"
+
+	android:padding="6dip"
+android:background="#d3d3d3"
+
+	>
+
+	<TextView android:id="@+id/icon" android:layout_width="46dip"
+		android:layout_height="fill_parent" android:layout_alignParentTop="true"
+		android:layout_alignParentBottom="true" android:layout_marginRight="2dip"
+
+		android:singleLine="true" android:ellipsize="marquee"
+		android:text="1000" 
+		android:textColor="#000000"/>
+
+	<TextView android:id="@+id/secondLine" 
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:layout_toRightOf="@id/icon"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true" android:singleLine="true"
+		android:ellipsize="marquee"
+		android:text="NAME OF PAYMENT" 
+		android:textColor="#000000"/>
+
+	<TextView android:id="@+id/opis"
+	android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:layout_toRightOf="@id/icon"
+		android:layout_alignParentRight="true" 
+		android:layout_alignParentBottom="true"
+		android:layout_below="@id/secondLine"
+		android:gravity="center_vertical"
+		android:text="detailed description" 
+		android:textSize="12sp"
+		android:textColor="#000000"/>
+		
+		<TextView android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/icon"
+        android:gravity="center_vertical"
+        android:text="12/12/2010" 
+        android:textSize="11sp"
+        android:textColor="#000000"/>
+		
+
+</RelativeLayout>

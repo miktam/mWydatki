@@ -2,6 +2,7 @@ package com.developand.mwydatki;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -99,13 +100,27 @@ public class BillsView extends ListActivity {
 			}
 			OperationEntry o = items.get(position);
 			if (o != null) {
-				TextView tt = (TextView) v.findViewById(R.id.toptext);
-				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
-				if (tt != null) {
-					tt.setText(o.getMainTitle());
+				TextView saldo = (TextView) v.findViewById(R.id.icon);
+				TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
+				TextView descrOpOperation = (TextView) v.findViewById(R.id.opis);
+				TextView date = (TextView) v.findViewById(R.id.date);
+
+				if (mainTitle != null) {
+					mainTitle.setText(o.getMainTitle());
 				}
-				if (bt != null) {
-					bt.setText(o.getOpisOperacji());
+				if (descrOpOperation != null) {
+					descrOpOperation.setText(o.getOpisOperacji());
+				}
+				if (null != saldo)
+				{
+					saldo.setText("" + o.getKwotaOperacji());
+				}
+				
+				if (null != date)
+				{
+					date.setText( "" + o.getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
+							+ o.getDataOperacji().get(Calendar.MONTH) + "/"
+							+ (o.getDataOperacji().get(Calendar.YEAR) - 2000));
 				}
 			}
 			return v;
