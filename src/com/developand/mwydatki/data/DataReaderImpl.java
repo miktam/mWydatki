@@ -49,10 +49,6 @@ public class DataReaderImpl implements DataReader {
 
 		Log.v(TAG, "starting reading file");
 
-		// mimic singleton here
-		if (null != this.mapFileData)
-			return this.mapFileData;
-
 		mapFileData = new HashMap<String, Spanned>();
 
 		File dir = new File(directory);
