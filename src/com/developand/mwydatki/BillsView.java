@@ -43,7 +43,7 @@ public class BillsView extends ListActivity {
 				downloadData();
 			}
 		};
-		Thread thread = new Thread(null, dataReader, "MagentoBackground");
+		Thread thread = new Thread(null, dataReader, "parser");
 		thread.start();
 
 		String converting = this.getString(R.string.converting);
@@ -70,11 +70,11 @@ public class BillsView extends ListActivity {
 		DataReader dr = new DataReaderImpl();
 		try {
 			dr.readData();
-			operations = dr.getSortedOperationsByIndex(0, OperationType.ALL);
+			operations = dr.getOperationsByIndex(0, OperationType.ALL);
 
 			Log.v(TAG, "size = " + operations.size());
 
-			runOnUiThread(returnRes);
+			this.runOnUiThread(returnRes);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,38 +106,20 @@ public class BillsView extends ListActivity {
 						.findViewById(R.id.opis);
 				TextView date = (TextView) v.findViewById(R.id.date);
 
-				if (o.isCategory()) {
-					if (null != mainTitle) {
-						mainTitle.setText(o.getMainTitle());
-					}
-					if (null != descrOpOperation) {
-						descrOpOperation.setText("");
-					}
-					if (null != saldo) {
-						saldo.setText("" + o.getKwotaOperacji());
-					}
-
-					if (null != date) {
-						date.setText("");
-					}
-					
-				} else {
-
-					if (null != mainTitle) {
-						mainTitle.setText(o.getMainTitle());
-					}
-					if (null != descrOpOperation) {
-						descrOpOperation.setText(o.getOpisOperacji());
-					}
-					if (null != saldo) {
-						saldo.setText("" + o.getKwotaOperacji());
-					}
-
-					if (null != date) {
-						date.setText(o.getDataOperacjiFormatted());
-					}
-
+				if (null != mainTitle) {
+					mainTitle.setText(o.getMainTitle());
 				}
+				if (null != descrOpOperation) {
+					descrOpOperation.setText(o.getOpisOperacji());
+				}
+				if (null != saldo) {
+					saldo.setText("" + o.getKwotaOperacji());
+				}
+
+				if (null != date) {
+					date.setText(o.getDataOperacjiFormatted());
+				}
+
 			}
 			return v;
 		}
