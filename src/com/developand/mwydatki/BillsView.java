@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
 import com.developand.mwydatki.data.OperationEntry;
+import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
 
 public class BillsView extends ListActivity {
@@ -34,7 +35,7 @@ public class BillsView extends ListActivity {
 		setContentView(R.layout.main);
 		operations = new ArrayList<OperationEntry>();
 		this.opEntryAdapter = new OperationEntryAdapter(this, R.layout.row,
-				operations);
+				operations, this);
 		setListAdapter(this.opEntryAdapter);
 
 		dataReader = new Runnable() {
@@ -81,47 +82,5 @@ public class BillsView extends ListActivity {
 		}
 	}
 
-	private class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
-
-		private List<OperationEntry> items;
-
-		public OperationEntryAdapter(Context context, int textViewResourceId,
-				List<OperationEntry> items) {
-			super(context, textViewResourceId, items);
-			this.items = items;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View v = convertView;
-			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = vi.inflate(R.layout.row, null);
-			}
-			OperationEntry o = items.get(position);
-			if (o != null) {
-				TextView saldo = (TextView) v.findViewById(R.id.icon);
-				TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
-				TextView descrOpOperation = (TextView) v
-						.findViewById(R.id.opis);
-				TextView date = (TextView) v.findViewById(R.id.date);
-
-				if (null != mainTitle) {
-					mainTitle.setText(o.getMainTitle());
-				}
-				if (null != descrOpOperation) {
-					descrOpOperation.setText(o.getOpisOperacji());
-				}
-				if (null != saldo) {
-					saldo.setText("" + o.getKwotaOperacji());
-				}
-
-				if (null != date) {
-					date.setText(o.getDataOperacjiFormatted());
-				}
-
-			}
-			return v;
-		}
-	}
+	
 }
