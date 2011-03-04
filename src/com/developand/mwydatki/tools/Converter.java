@@ -7,20 +7,23 @@ public class Converter {
 
 	/**
 	 * Converter from string to double
-	 * @param toConv - string to convert
+	 * 
+	 * @param toConv
+	 *            - string to convert
 	 * @return converted value
 	 */
 	public static Double toDouble(String toConv) {
-		String replacedDots = toConv.replace(".", "");
-		String replacedCommas = replacedDots.replace(",", ".");
+		Double value = 0.0;
 		try {
-		Double value = Double.valueOf(replacedCommas);
-		return value;
-		}
-		catch (NumberFormatException e)
-		{
+			String replacedDots = toConv.replace(".", "");
+			String replacedCommas = replacedDots.replace(",", ".");
+
+			value = Double.valueOf(replacedCommas);
+
+		} catch (Exception e) {
 			return 0.0;
 		}
+		return value;
 	}
 
 	public static Date toDate(String date) {
@@ -33,14 +36,15 @@ public class Converter {
 			Integer day = Integer.parseInt(split[0]);
 			d = new Date(year, month, day);
 		}
-		
+
 		return d;
 	}
 
 	public static Calendar toCalendar(String dataKsiegowania) {
-		Calendar cal =  Calendar.getInstance();
-		String [] date = dataKsiegowania.split("-");		
-		cal.set(Integer.valueOf(date[2]), Integer.valueOf(date[1]), Integer.valueOf(date[0]));
+		Calendar cal = Calendar.getInstance();
+		String[] date = dataKsiegowania.split("-");
+		cal.set(Integer.valueOf(date[2]), Integer.valueOf(date[1]),
+				Integer.valueOf(date[0]));
 		return cal;
 	}
 

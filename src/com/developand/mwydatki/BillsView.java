@@ -53,19 +53,6 @@ public class BillsView extends ListActivity {
 				true);
 	}
 
-	private Runnable returnRes = new Runnable() {
-
-		public void run() {
-			if (operations != null && operations.size() > 0) {
-				opEntryAdapter.notifyDataSetChanged();
-				for (int i = 0; i < operations.size(); i++)
-					opEntryAdapter.add(operations.get(i));
-			}
-			progressDialog.dismiss();
-			opEntryAdapter.notifyDataSetChanged();
-		}
-	};
-
 	private void downloadData() {
 
 		DataReader dr = new DataReaderImpl();
@@ -75,12 +62,21 @@ public class BillsView extends ListActivity {
 
 			Log.v(TAG, "size = " + operations.size());
 
-			this.runOnUiThread(returnRes);
+			this.runOnUiThread(new Runnable() {
+				
+				public void run() {
+					if (operations != null && operations.size() > 0) {
+						opEntryAdapter.notifyDataSetChanged();
+						for (int i = 0; i < operations.size(); i++)
+							opEntryAdapter.add(operations.get(i));
+					}
+					progressDialog.dismiss();
+					opEntryAdapter.notifyDataSetChanged();					
+				}
+			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	
+	}	
 }

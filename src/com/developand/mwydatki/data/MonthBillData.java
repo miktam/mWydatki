@@ -69,6 +69,8 @@ public class MonthBillData {
 
 		Scanner s = new Scanner(source);
 		parseMonthYear(s);
+		
+		//s.skip("Elektroniczne zestawienie operacji za");
 
 		setSaldoPoczatkowe(parseSaldoPoczatkowe(s));
 
@@ -96,8 +98,15 @@ public class MonthBillData {
 		}
 
 		Calendar cal = Calendar.getInstance();
+		try {
 		cal.setTime(firstDate);
 		((OperationEntry) split[0]).dataOperacji = cal;
+		}
+		catch (Exception e)
+		{
+			// TODO fix that
+			Log.w(TAG, e.getMessage());
+		}
 
 	}
 
