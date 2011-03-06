@@ -1,14 +1,17 @@
 package com.developand.mwydatki;
 
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 
 public class Main extends TabActivity {
+	private static final String TAG = "Main";
+
 	/** Called when the activity is first created. */
 
 	@Override
@@ -19,6 +22,8 @@ public class Main extends TabActivity {
 		TabHost tabHost = getTabHost(); // The activity TabHost
 		TabHost.TabSpec spec; // Resusable TabSpec for each tab
 		Intent intent; // Reusable Intent for each tab
+		
+		try {
 
 		// Create an Intent to launch an Activity for the tab (to be reused)
 		intent = new Intent().setClass(this, AllExpensesView.class);
@@ -40,5 +45,13 @@ public class Main extends TabActivity {
 		tabHost.addTab(spec);
 
 		tabHost.setCurrentTab(2);
+		}
+		catch (Exception e)
+		{
+			Log.w(TAG, "really bad: " + e.getMessage());
+			Toast tst = Toast.makeText(this, "File is corrupted?", Toast.LENGTH_SHORT);
+			tst.show();
+			this.finish();
+		}
 	}
 }

@@ -67,10 +67,11 @@ public class MonthBillData {
 
 	public void parseSource(String source) {
 
+		Log.v(TAG, "start parsing file");
+		Log.v(TAG, source);
+		
 		Scanner s = new Scanner(source);
 		parseMonthYear(s);
-		
-		//s.skip("Elektroniczne zestawienie operacji za");
 
 		setSaldoPoczatkowe(parseSaldoPoczatkowe(s));
 
@@ -81,6 +82,34 @@ public class MonthBillData {
 		normalizeOperationDates(firstDate);
 
 	}
+	
+	private String parseSaldoPoczatkowe(Scanner s) {
+		String saldoPoczatkowe = null;
+		while (s.hasNextLine()) {
+			String line = s.nextLine();
+
+			if (line.startsWith("Saldo")) {
+				String[] lineSaldo = line.split(" ");
+				saldoPoczatkowe = lineSaldo[lineSaldo.length - 1];
+				break;
+			}
+		}
+		return saldoPoczatkowe;
+	}
+
+	private void parseMonthYear(Scanner s) {
+		while (s.hasNextLine()) {
+			String line = s.nextLine();
+
+			if (line.startsWith("Elektroniczne zestawienie operacji za")) {
+				String[] arr = line.split(" ");
+				setYear(arr[arr.length - 1]);
+				setMonth(arr[arr.length - 2]);
+				break;
+			}
+		}
+	}
+
 
 	/**
 	 * move dates to one ahead - as parsing doing not so great
@@ -181,7 +210,7 @@ public class MonthBillData {
 					}
 
 					// add date to the end of the string
-					sb.append(" 01-07-2009");
+					sb.append(" 01-01-2011");
 					this.addOperationEntry(new OperationEntry(sb.toString(),
 							mainTitle.toString()));
 					setSaldoKoncowe(line);
@@ -194,33 +223,7 @@ public class MonthBillData {
 		}
 	}
 
-	private String parseSaldoPoczatkowe(Scanner s) {
-		String saldoPoczatkowe = null;
-		while (s.hasNextLine()) {
-			String line = s.nextLine();
-
-			if (line.startsWith("Saldo")) {
-				String[] lineSaldo = line.split(" ");
-				saldoPoczatkowe = lineSaldo[lineSaldo.length - 1];
-				break;
-			}
-		}
-		return saldoPoczatkowe;
-	}
-
-	private void parseMonthYear(Scanner s) {
-		while (s.hasNextLine()) {
-			String line = s.nextLine();
-
-			if (line.startsWith("Elektroniczne zestawienie operacji za")) {
-				String[] arr = line.split(" ");
-				setYear(arr[arr.length - 1]);
-				setMonth(arr[arr.length - 2]);
-				break;
-			}
-		}
-	}
-
+	
 	public List<OperationEntry> getOperationsInPlus() {
 
 		if (this.opsListInPlus == null) {

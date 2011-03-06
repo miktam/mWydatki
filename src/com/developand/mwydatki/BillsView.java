@@ -58,13 +58,14 @@ public class BillsView extends ListActivity {
 		DataReader dr = new DataReaderImpl();
 		try {
 			dr.readData();
-			operations = dr.getOperationsByIndex(0, OperationType.ALL);
+			operations = dr.getOperationsByIndex(0, OperationType.MINUS);
 
 			Log.v(TAG, "size = " + operations.size());
 
 			this.runOnUiThread(new Runnable() {
 				
 				public void run() {
+					opEntryAdapter.clear();
 					if (operations != null && operations.size() > 0) {
 						opEntryAdapter.notifyDataSetChanged();
 						for (int i = 0; i < operations.size(); i++)
