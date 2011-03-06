@@ -45,9 +45,12 @@ public class DataReaderImpl implements DataReader {
 	 * 
 	 * @see com.developand.mwydatki.DataReader#readData()
 	 */
-	public Map<String, Spanned> readData() throws IOException {
+	public Map<String, Spanned> readData(boolean allowCache) throws IOException {
 
 		Log.v(TAG, "starting reading file");
+		
+		if (allowCache && null != mapFileData)
+			return mapFileData;
 
 		mapFileData = new HashMap<String, Spanned>();
 

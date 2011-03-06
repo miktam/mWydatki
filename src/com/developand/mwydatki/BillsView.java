@@ -57,7 +57,8 @@ public class BillsView extends ListActivity {
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			dr.readData();
+			// this is first view - do not allow cache
+			dr.readData(false);
 			operations = dr.getOperationsByIndex(0, OperationType.MINUS);
 
 			Log.v(TAG, "size = " + operations.size());

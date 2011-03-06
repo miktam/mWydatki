@@ -51,7 +51,8 @@ public class IncomeView extends ListActivity {
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			dr.readData();
+			// allow cache
+			dr.readData(true);
 			operations = dr.getOperationsByIndex(0, OperationType.PLUS);
 
 			Log.v(TAG, "size = " + operations.size());
