@@ -11,7 +11,7 @@ import android.text.Spanned;
 
 public interface DataReader {
 	
-	Map<String, Spanned> readData() throws IOException;
+	Map<String, Spanned> readData(boolean allowCache) throws IOException;
 	
 	Set<String> getFiles();
 	List<OperationEntry> getOperations(String file);
