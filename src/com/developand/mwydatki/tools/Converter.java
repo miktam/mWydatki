@@ -2,6 +2,9 @@ package com.developand.mwydatki.tools;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import com.developand.mwydatki.data.common.Month;
 
 public class Converter {
 
@@ -41,6 +44,12 @@ public class Converter {
 		}
 
 		return d;
+	}
+	
+	public static String toMonth(int i)
+	{
+		Locale l = Locale.getDefault();
+		return Month.getMonth(i, l);
 	}
 
 	public static Calendar toCalendar(String dataKsiegowania) {
