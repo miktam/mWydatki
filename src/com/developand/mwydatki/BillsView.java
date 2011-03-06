@@ -57,11 +57,11 @@ public class BillsView extends ListActivity {
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			// this is first view - do not allow cache
-			dr.readData(false);
+			// allow cache
+			dr.readData(true);
 			operations = dr.getOperationsByIndex(0, OperationType.MINUS);
 
-			Log.v(TAG, "size = " + operations.size());
+			Log.d(TAG, "size = " + operations.size());
 
 			this.runOnUiThread(new Runnable() {
 				

@@ -2,10 +2,13 @@ package com.developand.mwydatki.data;
 
 import java.util.Calendar;
 
+import android.util.Log;
+
 import com.developand.mwydatki.tools.Converter;
 
 public class OperationEntry {
 
+	private static final String TAG = "OperationEntry";
 	Calendar dataKsiegowania;
 	Calendar dataOperacji;
 	String opisOperacji;
@@ -16,8 +19,7 @@ public class OperationEntry {
 
 	@Override
 	public String toString() {
-		return getDataOperacjiFormatted() + "\n" + getMainTitle() + "\n"
-				+ getOpisOperacji() + "\n" + getKwotaOperacji();
+		return getDataOperacjiFormatted() + "|" + getMainTitle() + "|" + getKwotaOperacji();
 	}
 
 	public OperationEntry(String fullOpis, String mainTitle) {
@@ -44,6 +46,8 @@ public class OperationEntry {
 			}
 
 			this.opisOperacji = opis.toString();
+			
+			Log.d(TAG, "created entry: " + this.toString());
 		}
 
 	}
@@ -63,6 +67,13 @@ public class OperationEntry {
 	public String getDataOperacjiFormatted() {
 		StringBuilder date = new StringBuilder();
 		date.append(getDataOperacji().get(Calendar.DAY_OF_MONTH) + " "
+				+ Converter.toMonth(getDataOperacji().get(Calendar.MONTH)));
+		return date.toString();
+	}
+	
+	public String getDataKsiegowaniaFormatted() {
+		StringBuilder date = new StringBuilder();
+		date.append(getDataKsiegowania().get(Calendar.DAY_OF_MONTH) + " "
 				+ Converter.toMonth(getDataOperacji().get(Calendar.MONTH)));
 		return date.toString();
 	}
