@@ -55,7 +55,7 @@ public class IncomeView extends ListActivity {
 			dr.readData(true);
 			operations = dr.getOperationsByIndex(0, OperationType.PLUS);
 
-			Log.v(TAG, "size = " + operations.size());
+			Log.d(TAG, "size = " + operations.size());
 
 			this.runOnUiThread(new Runnable() {
 				

@@ -18,6 +18,7 @@ public class MonthBillData {
 	int year;
 	Double saldoPoczatkowe;
 	Double saldoKoncowe;
+	
 	List<OperationEntry> opsList = new ArrayList<OperationEntry>();
 
 	List<OperationEntry> opsListInPlus = null;
@@ -79,7 +80,8 @@ public class MonthBillData {
 
 		parseEachOperation(s);
 
-		normalizeOperationDates(firstDate);
+		// currently remove this op
+		//normalizeOperationDates(firstDate);
 
 	}
 	
@@ -118,6 +120,10 @@ public class MonthBillData {
 	 */
 	private void normalizeOperationDates(Date firstDate) {
 
+		Log.v(TAG, "\nbefore normalizing");
+		for (OperationEntry op:opsList)
+			Log.v(TAG, op.toString());
+		
 		Object[] split = opsList.toArray();
 
 		for (int i = split.length - 1; i > 0; i--) {
@@ -136,6 +142,10 @@ public class MonthBillData {
 			// TODO fix that
 			Log.w(TAG, e.getMessage());
 		}
+		
+		Log.v(TAG, "\nafter normalizing");
+		for (OperationEntry op:opsList)
+			Log.v(TAG, op.toString());
 
 	}
 

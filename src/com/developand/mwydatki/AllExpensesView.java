@@ -53,11 +53,11 @@ public class AllExpensesView extends ListActivity {
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			// allow cache
-			dr.readData(true);
+			// no not allow cache
+			dr.readData(false);
 			operations = dr.getOperationsByIndex(0, OperationType.ALL);
 
-			Log.v(TAG, "size = " + operations.size());
+			Log.d(TAG, "size = " + operations.size());
 
 			this.runOnUiThread(new Runnable() {
 				
