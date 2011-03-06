@@ -14,6 +14,9 @@ public class Converter {
 	 */
 	public static Double toDouble(String toConv) {
 		Double value = 0.0;
+		if (null == toConv || toConv.length() == 0)
+			return value;
+		
 		try {
 			String replacedDots = toConv.replace(".", "");
 			String replacedCommas = replacedDots.replace(",", ".");
