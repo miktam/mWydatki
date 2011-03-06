@@ -62,16 +62,8 @@ public class OperationEntry {
 
 	public String getDataOperacjiFormatted() {
 		StringBuilder date = new StringBuilder();
-		date.append(getDataOperacji().get(Calendar.DAY_OF_MONTH) + "/"
-				+ getDataOperacji().get(Calendar.MONTH) + "/");
-
-		StringBuilder year = new StringBuilder();
-		year.append(getDataOperacji().get(Calendar.YEAR) - 2000);
-		if (year.length() == 1)
-			year.insert(0, "0");
-
-		date.append(year);
-
+		date.append(getDataOperacji().get(Calendar.DAY_OF_MONTH) + " "
+				+ Converter.toMonth(getDataOperacji().get(Calendar.MONTH)));
 		return date.toString();
 	}
 
