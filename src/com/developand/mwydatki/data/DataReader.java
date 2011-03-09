@@ -19,7 +19,4 @@ public interface DataReader {
 	List<String> getOperationsStringByIndex(Integer index, OperationType type);
 	List<String> getOperationsFromStringByType(String source, OperationType type);
 	List<OperationEntry> getOperationsByIndex(Integer index, OperationType op);
-
-	List<OperationEntry> getSortedOperationsByIndex(Integer i, OperationType all);
-
 }

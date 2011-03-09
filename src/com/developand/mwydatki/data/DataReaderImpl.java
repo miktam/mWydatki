@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -28,9 +26,9 @@ public class DataReaderImpl implements DataReader {
 
 	private static Map<String, Spanned> mapFileData = null;
 
-	private static List<String> currentOperationsAll = new ArrayList<String>();
-	private static List<String> currentOperationsPlus = new ArrayList<String>();
-	private static List<String> currentOperationsMinus = new ArrayList<String>();
+//	private static List<String> currentOperationsAll = new ArrayList<String>();
+//	private static List<String> currentOperationsPlus = new ArrayList<String>();
+//	private static List<String> currentOperationsMinus = new ArrayList<String>();
 
 	/**
 	 * @param path
@@ -128,7 +126,6 @@ public class DataReaderImpl implements DataReader {
 
 	public List<String> getOperationsStringByIndex(Integer index,
 			OperationType type) {
-		List<String> ops = new ArrayList<String>();
 
 		if (getFiles().size() <= index)
 			return null;
@@ -164,48 +161,6 @@ public class DataReaderImpl implements DataReader {
 		MonthBillData mb = MonthBillData.getInstance();
 		mb.parseSource(mapFileData.values().toArray()[index].toString());
 		return mb.getOperationsByType(op);
-	}
-
-	public List<OperationEntry> getSortedOperationsByIndex(Integer index,
-			OperationType op) {
-
-		Map<String, List<OperationEntry>> map = new HashMap<String, List<OperationEntry>>();
-		List<OperationEntry> newList = new ArrayList<OperationEntry>();
-
-		List<OperationEntry> wholeList = getOperationsByIndex(index, op);
-		String tmpMainTitle = new String();
-		for (final OperationEntry o : wholeList) {
-			if (map.containsKey(o.getMainTitle())) {
-				map.get(o.getMainTitle()).add(o);
-			} else {
-				map.put(o.getMainTitle(), new ArrayList<OperationEntry>() {
-					{
-						add(o);
-					}
-				});
-			}
-		}
-
-		Iterator i = map.entrySet().iterator();
-		while (i.hasNext()) {
-
-			Map.Entry<String, List<OperationEntry>> pair = (Entry<String, List<OperationEntry>>) i
-					.next();
-			
-			Double saldo = 0.0;
-
-			for (OperationEntry opMagic : pair.getValue()) {
-				saldo += opMagic.getKwotaOperacji();
-				newList.add(opMagic);
-			}
-			
-			OperationEntry opDupa = new OperationEntry("", pair.getKey());
-			opDupa.setCategory(true);
-			opDupa.setKwotaOperacji(saldo);
-			newList.add(opDupa);
-
-		}
-		return newList;
 	}
 
 }
