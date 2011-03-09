@@ -51,9 +51,8 @@ public class DataReaderImpl implements DataReader {
 		Log.v(TAG, "found files #:" + files.size());
 
 		for (String file : files) {
-			File f = new File(directory, file);
+
 			Spanned data = Html.fromHtml(read(directory + file));
-			
 			spannedList.add(data);
 		}
 		

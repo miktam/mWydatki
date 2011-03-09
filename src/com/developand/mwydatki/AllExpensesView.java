@@ -8,7 +8,6 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
@@ -28,7 +27,6 @@ public class AllExpensesView extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
 		operations = new ArrayList<OperationEntry>();
 		this.opEntryAdapter = new OperationEntryAdapter(this, R.layout.row,
 				operations, this);

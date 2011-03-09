@@ -1,14 +1,10 @@
 package com.developand.mwydatki;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Scanner;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -16,13 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.developand.mwydatki.data.DataReader;
-import com.developand.mwydatki.data.DataReaderImpl;
-import com.developand.mwydatki.data.common.OperationType;
-
 public class AttachmentReader extends Activity {
-
-	private static String encoding = "iso-8859-2";
 
 	private static final String TAG = "AttachmentReader";
 
@@ -44,26 +34,6 @@ public class AttachmentReader extends Activity {
 			Intent prodigy = new Intent(this, Main.class);
 			this.startActivity(prodigy);
 			
-//			StringBuilder text = new StringBuilder();
-//			String NL = System.getProperty("line.separator");
-//			Scanner scanner = new Scanner(stream, encoding);
-//			try {
-//				while (scanner.hasNextLine()) {
-//					text.append(scanner.nextLine() + NL);
-//				}
-//			} finally {
-//				scanner.close();
-//			}
-//
-//			Log.v(TAG, text.toString());
-//
-//			DataReader dr = new DataReaderImpl();
-//			List<String> list = dr.getOperationsFromStringByType(
-//					text.toString(), OperationType.ALL);
-//
-//			for (String s : list)
-//				Log.v(TAG, s);
-
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
