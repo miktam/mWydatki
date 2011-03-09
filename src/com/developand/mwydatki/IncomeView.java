@@ -25,7 +25,7 @@ public class IncomeView extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		operations = new ArrayList<OperationEntry>();
-		this.opEntryAdapter = new OperationEntryAdapter(this, R.layout.row,
+		this.opEntryAdapter = new OperationEntryAdapter(this, R.layout.detailed_view,
 				operations, this);
 		setListAdapter(this.opEntryAdapter);
 

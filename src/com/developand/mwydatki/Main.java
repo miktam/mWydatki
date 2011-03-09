@@ -43,6 +43,12 @@ public class Main extends TabActivity {
 		spec = tabHost.newTabSpec("minus").setIndicator("Wydatki", null)
 				.setContent(intent);
 		tabHost.addTab(spec);
+		
+		
+		intent = new Intent().setClass(this, GroupedExpenses.class);
+		spec = tabHost.newTabSpec("details").setIndicator("Detailes", null)
+				.setContent(intent);
+		tabHost.addTab(spec);
 
 		tabHost.setCurrentTab(0);
 		}
