@@ -29,7 +29,7 @@ public class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 		View v = convertView;
 		if (v == null) {
 			LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = vi.inflate(R.layout.row, null);
+			v = vi.inflate(R.layout.detailed_view, null);
 		}
 		OperationEntry o = items.get(position);
 		if (o != null) {

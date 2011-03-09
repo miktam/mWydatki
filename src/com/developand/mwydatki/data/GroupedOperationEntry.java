@@ -12,7 +12,7 @@ public class GroupedOperationEntry {
 	private static GroupedOperationEntry INSTANCE = null;
 	private static final String TAG = GroupedOperationEntry.class.toString();
 	
-	private static Map<String, List<OperationEntry>> ops = new HashMap<String, List<OperationEntry>>();
+	public static Map<String, List<OperationEntry>> ops = new HashMap<String, List<OperationEntry>>();
 
 	public static GroupedOperationEntry getInstance() {
 		if (null == INSTANCE)

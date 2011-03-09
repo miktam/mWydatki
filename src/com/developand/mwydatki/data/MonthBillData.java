@@ -227,8 +227,10 @@ public class MonthBillData {
 					break;
 				}
 
-				this.addOperationEntry(new OperationEntry(whole.toString(),
-						mainTitle.toString()));
+				OperationEntry operEntry = new OperationEntry(whole.toString(),
+						mainTitle.toString());
+				this.addOperationEntry(operEntry);
+				GroupedOperationEntry.getInstance().add(operEntry);
 			}
 		}
 	}
