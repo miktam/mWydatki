@@ -13,6 +13,7 @@ import com.developand.mwydatki.data.DataReaderImpl;
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
+import com.developand.mwydatki.tools.ToastMaker;
 
 public class IncomeView extends ListActivity {
 	private static final String TAG = "IncomeView";
@@ -68,8 +69,8 @@ public class IncomeView extends ListActivity {
 				}
 			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ToastMaker.getToast(this, e.getLocalizedMessage());
+			this.finish();
 		}
 	}	
 }

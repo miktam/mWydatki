@@ -1,5 +1,7 @@
 package com.developand.mwydatki;
 
+import com.developand.mwydatki.tools.ToastMaker;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -55,8 +57,7 @@ public class Main extends TabActivity {
 		catch (Exception e)
 		{
 			Log.w(TAG, "really bad: " + e.getMessage());
-			Toast tst = Toast.makeText(this, "File is corrupted?", Toast.LENGTH_SHORT);
-			tst.show();
+			ToastMaker.getToast(this, "File is corrupted?");
 			this.finish();
 		}
 	}

@@ -71,8 +71,7 @@ public class AllExpensesView extends ListActivity {
 				}
 			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		}
 	}	
 }
