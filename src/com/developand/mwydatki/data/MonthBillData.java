@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.tools.Converter;
+import com.developand.mwydatki.tools.ToastMaker;
 
 public class MonthBillData {
 
@@ -118,6 +119,7 @@ public class MonthBillData {
 	 * 
 	 * @param firstDate
 	 */
+	@Deprecated
 	private void normalizeOperationDates(Date firstDate) {
 
 		Log.v(TAG, "\nbefore normalizing");

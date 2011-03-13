@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import com.developand.mwydatki.tools.ToastMaker;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -35,8 +38,8 @@ public class AttachmentReader extends Activity {
 			this.startActivity(prodigy);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ToastMaker.getToast(this, e.getLocalizedMessage());
+			this.finish();
 		}
 
 	}

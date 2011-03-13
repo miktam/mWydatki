@@ -74,7 +74,6 @@ public class DataReaderImpl implements DataReader {
 
 	}
 
-	// TODO add parsing only EKONTO ...
 	// TODO add handling lack of access to sd card
 	private String read(String fileName) throws IOException {
 
