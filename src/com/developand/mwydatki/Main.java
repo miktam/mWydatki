@@ -52,7 +52,7 @@ public class Main extends TabActivity {
 				.setContent(intent);
 		tabHost.addTab(spec);
 
-		tabHost.setCurrentTab(0);
+		tabHost.setCurrentTab(3);
 		}
 		catch (Exception e)
 		{

@@ -141,7 +141,6 @@ public class MonthBillData {
 		}
 		catch (Exception e)
 		{
-			// TODO fix that
 			Log.w(TAG, e.getMessage());
 		}
 		
