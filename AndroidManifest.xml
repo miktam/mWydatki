@@ -29,7 +29,6 @@
 		<activity android:name="AllExpensesView" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		<activity android:name="IncomeView" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		<activity android:name="BillsView" android:theme="@android:style/Theme.NoTitleBar"></activity>
-		<activity android:name="GroupedExpenses" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		<activity android:name="AttachmentReader">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
