@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.tools.Converter;
-import com.developand.mwydatki.tools.ToastMaker;
 
 public class MonthBillData {
 
@@ -231,7 +230,6 @@ public class MonthBillData {
 				OperationEntry operEntry = new OperationEntry(whole.toString(),
 						mainTitle.toString());
 				this.addOperationEntry(operEntry);
-				GroupedOperationEntry.getInstance().add(operEntry);
 			}
 		}
 	}

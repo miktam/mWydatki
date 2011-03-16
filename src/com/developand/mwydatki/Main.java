@@ -46,13 +46,7 @@ public class Main extends TabActivity {
 				.setContent(intent);
 		tabHost.addTab(spec);
 		
-		
-		intent = new Intent().setClass(this, GroupedExpenses.class);
-		spec = tabHost.newTabSpec("details").setIndicator("Detailes", null)
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		tabHost.setCurrentTab(3);
+		tabHost.setCurrentTab(0);
 		}
 		catch (Exception e)
 		{
