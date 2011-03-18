@@ -8,12 +8,15 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 
 import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
+import com.developand.mwydatki.tools.ToastMaker;
 
 public class AllExpensesView extends ListActivity {
 
@@ -47,11 +50,20 @@ public class AllExpensesView extends ListActivity {
 				true);
 	}
 
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		//super.onListItemClick(l, v, position, id);
+		Log.v(TAG, "position = " + position);
+		Object obj = operations.toArray()[position];
+		ToastMaker.getToast(this, "you selected " + obj);
+	}
+	
 	private void downloadData() {
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			// no not allow cache
+			// no not allow cache - it is first view to show
 			dr.readData(false);
 			operations = dr.getOperationsByIndex(0, OperationType.ALL);
 
