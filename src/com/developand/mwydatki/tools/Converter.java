@@ -4,9 +4,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.util.Log;
+
 import com.developand.mwydatki.data.common.Month;
 
 public class Converter {
+
+	private static final String TAG = Converter.class.getName();
 
 	/**
 	 * Converter from string to double
@@ -53,6 +57,7 @@ public class Converter {
 	}
 
 	public static Calendar toCalendar(String dataKsiegowania) {
+		Log.d(TAG, dataKsiegowania);
 		Calendar cal = Calendar.getInstance();
 		String[] date = dataKsiegowania.split("-");
 		cal.set(Integer.valueOf(date[2]), Integer.valueOf(date[1]),

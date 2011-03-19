@@ -13,7 +13,7 @@ import com.developand.mwydatki.tools.Converter;
 
 public class MonthBillData {
 
-	private static final String TAG = "MonthBill";
+	private static final String TAG = MonthBillData.class.getName();
 	String month;
 	int year;
 	Double saldoPoczatkowe;
@@ -27,7 +27,6 @@ public class MonthBillData {
 	private static MonthBillData INSTANCE = null;
 
 	public List<OperationEntry> getOperations() {
-		// Log.v(TAG, "amount of operations = " + opsList.size());
 		return opsList;
 	}
 
@@ -128,15 +127,13 @@ public class MonthBillData {
 		Object[] split = opsList.toArray();
 
 		for (int i = split.length - 1; i > 0; i--) {
-			// Date tmpDate = ((OperationEntry)split[i]).dataOperacji;
-			// Date dateToKeep = ((OperationEntry)split[i-1]).dataOperacji;
-			((OperationEntry) split[i]).dataOperacji = ((OperationEntry) split[i - 1]).dataOperacji;
+			((OperationEntry) split[i]).setDataOperacji(((OperationEntry) split[i - 1]).getDataOperacji());
 		}
 
 		Calendar cal = Calendar.getInstance();
 		try {
 		cal.setTime(firstDate);
-		((OperationEntry) split[0]).dataOperacji = cal;
+		((OperationEntry) split[0]).setDataOperacji(cal);
 		}
 		catch (Exception e)
 		{
@@ -198,9 +195,10 @@ public class MonthBillData {
 				line = s.nextLine();
 
 			if (line.matches("[0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9][0-9][0-9] .*")) {
-				StringBuffer whole = new StringBuffer(line);
+				
 				mainTitle = new StringBuffer(line);
 				line = s.nextLine();
+				StringBuffer whole = new StringBuffer();
 				// replace with do while
 				while (s.hasNextLine()
 						&& !line.matches("[0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9][0-9][0-9] .*")

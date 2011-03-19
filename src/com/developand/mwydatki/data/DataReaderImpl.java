@@ -26,10 +26,6 @@ public class DataReaderImpl implements DataReader {
 
 	private static Map<String, Spanned> mapFileData = null;
 
-//	private static List<String> currentOperationsAll = new ArrayList<String>();
-//	private static List<String> currentOperationsPlus = new ArrayList<String>();
-//	private static List<String> currentOperationsMinus = new ArrayList<String>();
-
 	/**
 	 * @param path
 	 *            to directory with files

@@ -43,7 +43,7 @@ public class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 				mainTitle.setText(o.getMainTitle());
 			}
 			if (null != descrOpOperation) {
-				descrOpOperation.setText(o.getOpisOperacji());
+				descrOpOperation.setText(o.getTag());
 			}
 			if (null != saldo) {
 				saldo.setText("" + o.getKwotaOperacji());
