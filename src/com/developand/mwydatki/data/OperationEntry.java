@@ -47,7 +47,7 @@ public class OperationEntry {
 
 			this.opisOperacji = opis.toString();
 			
-			Log.d(TAG, "created entry: " + this.toString());
+			Log.v(TAG, "created entry: " + this.toString());
 		}
 
 	}
