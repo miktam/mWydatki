@@ -30,6 +30,10 @@ public class DataDownloader implements Runnable {
 		progressDialog = prog;
 	}
 	
+	/* what to run in background
+	 * (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		downloadData();
 	}
@@ -42,13 +46,15 @@ public class DataDownloader implements Runnable {
 		cacheMode = true;
 	}
 	
+	/**
+	 * 	read and parse data in file
+	 */
 	private void downloadData() {
 		
 		Log.v(TAG, "start download data in separated thread");
 
 		DataReader dr = new DataReaderImpl();
 		try {
-			// no not allow cache - it is first view to show
 			dr.readData(cacheMode);
 			operations = dr.getOperationsByIndex(0, opType);
 

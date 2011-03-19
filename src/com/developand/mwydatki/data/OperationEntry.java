@@ -9,12 +9,13 @@ import com.developand.mwydatki.tools.Converter;
 public class OperationEntry {
 
 	private static final String TAG = "OperationEntry";
-	Calendar dataKsiegowania;
-	Calendar dataOperacji;
-	String opisOperacji;
-	Double saldoPoOperacji;
-	Double kwotaOperacji;
-	String mainTitle;
+	private Calendar dataKsiegowania;
+	private Calendar dataOperacji;
+	private String opisOperacji;
+	private Double saldoPoOperacji;
+	private Double kwotaOperacji;
+	private String mainTitle;
+	private String tag;
 	private boolean isCategory;
 
 	@Override
@@ -23,24 +24,39 @@ public class OperationEntry {
 	}
 
 	public OperationEntry(String fullOpis, String mainTitle) {
+		
+		Log.d(TAG, "create:" + mainTitle + "|" + fullOpis);
 
 		this.mainTitle = mainTitle;
+		
+		// split main title
+		String[] mainArray = mainTitle.split(" ");
+		String dataKsiegowania = "";
+		if (mainArray.length>1)
+			dataKsiegowania = mainArray[0];
 
 		String[] ops = fullOpis.split(" ");
 
 		if (ops.length > 2) {
-			StringBuilder opis = new StringBuilder();
-			String dataKsiegowania = ops[0];
+			
 			String saldoPoOp = ops[ops.length - 2];
 			String kwota = ops[ops.length - 3];
 			String dataOperacji = ops[ops.length - 1];
+			
+			StringBuffer tagBuf = new StringBuffer(ops[0]);
+			tagBuf.append(" ");
+			tagBuf.append(ops[1]);
+			tagBuf.append(" ");
+			tagBuf.append(ops[2]);			
+			this.tag = tagBuf.toString();
 
 			this.kwotaOperacji = Converter.toDouble(kwota);
 			this.saldoPoOperacji = Converter.toDouble(saldoPoOp);
 			this.dataKsiegowania = Converter.toCalendar(dataKsiegowania);
 			this.dataOperacji = Converter.toCalendar(dataOperacji);
 
-			for (int i = 1; i < ops.length - 3; i++) {
+			StringBuilder opis = new StringBuilder();
+			for (int i = 0; i < ops.length - 3; i++) {
 
 				opis.append(ops[i] + " ");
 			}
@@ -50,6 +66,11 @@ public class OperationEntry {
 			Log.v(TAG, "created entry: " + this.toString());
 		}
 
+	}
+	
+	public String getTag()
+	{
+		return tag;
 	}
 
 	public String getMainTitle() {
