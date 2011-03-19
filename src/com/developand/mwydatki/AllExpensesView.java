@@ -10,10 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.developand.mwydatki.concurrent.data.DataDownloader;
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
+import com.developand.mwydatki.data.concurrent.DataDownloader;
 import com.developand.mwydatki.tools.ToastMaker;
 
 public class AllExpensesView extends ListActivity {
