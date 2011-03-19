@@ -8,10 +8,10 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.developand.mwydatki.concurrent.data.DataDownloader;
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
+import com.developand.mwydatki.data.concurrent.DataDownloader;
 
 public class BillsView extends ListActivity {
 
