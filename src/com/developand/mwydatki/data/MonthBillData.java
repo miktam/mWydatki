@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,13 +21,14 @@ public class MonthBillData {
 	int year;
 	Double saldoPoczatkowe;
 	Double saldoKoncowe;
-	
+
 	List<OperationEntry> opsList = new ArrayList<OperationEntry>();
-	
+
 	Map<String, List<OperationEntry>> similarOperations = new HashMap<String, List<OperationEntry>>();
 
 	List<OperationEntry> opsListInPlus = null;
 	List<OperationEntry> opsListInMinus = null;
+	List<OperationEntry> opsListDetailed = null;
 
 	private static MonthBillData INSTANCE = null;
 
@@ -37,23 +39,21 @@ public class MonthBillData {
 	public void setYear(String year) {
 		this.year = Integer.parseInt(year);
 	}
-	
+
 	/**
-	 * @param entry - opEntry to add and group by main title
+	 * @param entry
+	 *            - opEntry to add and group by main title
 	 */
-	private void addSimilarOperation(OperationEntry entry)
-	{
+	private void addSimilarOperation(OperationEntry entry) {
 		String mainTitle = entry.getMainTitle();
-		Log.d(TAG, "op to add: "+ mainTitle);
-		
-		if (similarOperations.containsKey(mainTitle))
-		{
-			Log.d(TAG, mainTitle + " already exist");
+		Log.v(TAG, "op to add: " + mainTitle);
+
+		if (similarOperations.containsKey(mainTitle)) {
+			Log.i(TAG, mainTitle + " already exist");
 			similarOperations.get(mainTitle).add(entry);
-		}
-		else
-		{
-			Log.d(TAG, mainTitle + " is first time here, put to new list");
+		} else {
+			Log.i(TAG, mainTitle + " is first time here, put to new list");
+			Log.i(TAG, similarOperations.keySet().toString());
 			List<OperationEntry> lToAdd = new ArrayList<OperationEntry>();
 			lToAdd.add(entry);
 			similarOperations.put(mainTitle, lToAdd);
@@ -61,9 +61,10 @@ public class MonthBillData {
 	}
 
 	/**
-	 * @param opEntry to add
+	 * @param opEntry
+	 *            to add
 	 * 
-	 * Additionally - group all entries sorting by similar title
+	 *            Additionally - group all entries sorting by similar title
 	 */
 	public void addOperationEntry(OperationEntry op) {
 		opsList.add(op);
@@ -101,7 +102,7 @@ public class MonthBillData {
 
 		Log.v(TAG, "start parsing file");
 		Log.v(TAG, source);
-		
+
 		Scanner s = new Scanner(source);
 		parseMonthYear(s);
 
@@ -112,10 +113,10 @@ public class MonthBillData {
 		parseEachOperation(s);
 
 		// currently remove this op
-		//normalizeOperationDates(firstDate);
+		// normalizeOperationDates(firstDate);
 
 	}
-	
+
 	private String parseSaldoPoczatkowe(Scanner s) {
 		String saldoPoczatkowe = null;
 		while (s.hasNextLine()) {
@@ -143,7 +144,6 @@ public class MonthBillData {
 		}
 	}
 
-
 	/**
 	 * move dates to one ahead - as parsing doing not so great
 	 * 
@@ -153,27 +153,27 @@ public class MonthBillData {
 	private void normalizeOperationDates(Date firstDate) {
 
 		Log.v(TAG, "\nbefore normalizing");
-		for (OperationEntry op:opsList)
+		for (OperationEntry op : opsList)
 			Log.v(TAG, op.toString());
-		
+
 		Object[] split = opsList.toArray();
 
 		for (int i = split.length - 1; i > 0; i--) {
-			((OperationEntry) split[i]).setDataOperacji(((OperationEntry) split[i - 1]).getDataOperacji());
+			((OperationEntry) split[i])
+					.setDataOperacji(((OperationEntry) split[i - 1])
+							.getDataOperacji());
 		}
 
 		Calendar cal = Calendar.getInstance();
 		try {
-		cal.setTime(firstDate);
-		((OperationEntry) split[0]).setDataOperacji(cal);
-		}
-		catch (Exception e)
-		{
+			cal.setTime(firstDate);
+			((OperationEntry) split[0]).setDataOperacji(cal);
+		} catch (Exception e) {
 			Log.w(TAG, e.getMessage());
 		}
-		
+
 		Log.v(TAG, "\nafter normalizing");
-		for (OperationEntry op:opsList)
+		for (OperationEntry op : opsList)
 			Log.v(TAG, op.toString());
 
 	}
@@ -227,7 +227,7 @@ public class MonthBillData {
 				line = s.nextLine();
 
 			if (line.matches("[0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9][0-9][0-9] .*")) {
-				
+
 				mainTitle = new StringBuffer(line);
 				line = s.nextLine();
 				StringBuffer whole = new StringBuffer();
@@ -264,7 +264,6 @@ public class MonthBillData {
 		}
 	}
 
-	
 	public List<OperationEntry> getOperationsInPlus() {
 
 		if (this.opsListInPlus == null) {
@@ -304,7 +303,28 @@ public class MonthBillData {
 		case PLUS:
 			toReturn = getOperationsInPlus();
 			break;
+		case DETAILED:
+			toReturn = getOperationsDetailed();
+			break;
 		}
 		return toReturn;
+	}
+
+	private List<OperationEntry> getOperationsDetailed() {
+
+		// have to make one dimentional list instead of matrix
+		if (null == opsListDetailed) {			
+			opsListDetailed = new ArrayList<OperationEntry>();
+			for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
+					.entrySet()) {
+				Log.d(TAG, entry.getKey());
+				OperationEntry op = new OperationEntry(entry.getKey());
+				Log.d(TAG, entry.getValue().toString());
+				opsListDetailed.add(op);
+				opsListDetailed.addAll(entry.getValue());
+			}
+		}
+
+		return opsListDetailed;
 	}
 }

@@ -2,16 +2,20 @@ package com.developand.mwydatki.data;
 
 import java.util.List;
 
-import com.developand.mwydatki.R;
-
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.developand.mwydatki.R;
+
 public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
+
+	private static final String TAG = DetailedOperationEntryAdapter.class.getName();
+	private int colorToShowGroup = android.R.color.darker_gray;
 
 	public DetailedOperationEntryAdapter(Context context,
 			int textViewResourceId, List<OperationEntry> items, Activity ac) {
@@ -26,6 +30,8 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = vi.inflate(R.layout.detailed_view, null);
 		}
+		Log.i(TAG, "size = " + items.size());
+		
 		OperationEntry o = items.get(position);
 		if (o != null) {
 			TextView saldo = (TextView) v.findViewById(R.id.icon);
@@ -33,14 +39,26 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 			TextView descrOpOperation = (TextView) v.findViewById(R.id.opis);
 			TextView date = (TextView) v.findViewById(R.id.date);
 
-			if (position % 2 == 0) {
-
+			if (o.isFaked) {
+				// made invisible not needed fields
+				date.setVisibility(View.GONE);
+				descrOpOperation.setVisibility(View.GONE);
 				if (null != mainTitle) {
 					mainTitle.setText(o.getMainTitle());
+					mainTitle.setBackgroundColor(colorToShowGroup);
 				}
-				if (null != descrOpOperation) {
-					descrOpOperation.setText(o.getTag());
+//				if (null != saldo) {
+//					saldo.setText("" + o.getKwotaOperacji());
+//					saldo.setBackgroundColor(colorToShowGroup);
+//				}
+
+			} else {
+				
+				descrOpOperation.setVisibility(View.GONE);
+				if (null != mainTitle) {
+					mainTitle.setText(o.getTag());
 				}
+				
 				if (null != saldo) {
 					saldo.setText("" + o.getKwotaOperacji());
 				}
@@ -48,20 +66,6 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 				if (null != date) {
 					date.setText(o.getDataKsiegowaniaFormatted());
 				}
-			} else
-			{				
-				// made invisible not needed fields
-				date.setVisibility(View.GONE);
-				descrOpOperation.setVisibility(View.GONE);
-				if (null != mainTitle) {
-					mainTitle.setText(o.getTag());
-					mainTitle.setBackgroundColor(android.R.color.darker_gray);
-					
-				}
-				if (null != saldo) {
-					saldo.setText("" + o.getKwotaOperacji());
-					saldo.setBackgroundColor(android.R.color.darker_gray);
-				}				
 			}
 
 		}

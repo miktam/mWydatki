@@ -17,15 +17,24 @@ public class OperationEntry {
 	private String mainTitle;
 	private String tag;
 	private boolean isCategory;
+	public final boolean isFaked;
 
 	@Override
 	public String toString() {
 		return getDataOperacjiFormatted() + "|" + getMainTitle() + "|" + getKwotaOperacji();
 	}
 
+	public OperationEntry(String mainTitle)
+	{
+		isFaked = true;
+		this.mainTitle = mainTitle;
+	}
+	
 	public OperationEntry(String fullOpis, String mainTitle) {
 		
-		Log.d(TAG, "create:" + mainTitle + "|" + fullOpis);
+		Log.v(TAG, "create:" + mainTitle + "|" + fullOpis);
+		
+		isFaked = false;
 
 		this.mainTitle = mainTitle;
 		

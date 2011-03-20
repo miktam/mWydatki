@@ -33,7 +33,7 @@ public class DetailedBillsView extends ListActivity {
 		progressDialog = ProgressDialog.show(DetailedBillsView.this, "",
 				this.getString(R.string.converting), true);
 
-		DataDownloader dd = new DataDownloader(operations, OperationType.ALL,
+		DataDownloader dd = new DataDownloader(operations, OperationType.DETAILED,
 				this, opEntryAdapter, progressDialog);
 		dd.enableCache();
 		Thread thread = new Thread(null, dd, "parser");
