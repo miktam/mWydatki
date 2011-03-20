@@ -57,7 +57,7 @@ public class Converter {
 	}
 
 	public static Calendar toCalendar(String dataKsiegowania) {
-		Log.d(TAG, dataKsiegowania);
+		Log.v(TAG, dataKsiegowania);
 		Calendar cal = Calendar.getInstance();
 		String[] date = dataKsiegowania.split("-");
 		cal.set(Integer.valueOf(date[2]), Integer.valueOf(date[1]),

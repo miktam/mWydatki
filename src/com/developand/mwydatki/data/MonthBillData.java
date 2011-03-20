@@ -3,7 +3,9 @@ package com.developand.mwydatki.data;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import android.util.Log;
@@ -20,6 +22,8 @@ public class MonthBillData {
 	Double saldoKoncowe;
 	
 	List<OperationEntry> opsList = new ArrayList<OperationEntry>();
+	
+	Map<String, List<OperationEntry>> similarOperations = new HashMap<String, List<OperationEntry>>();
 
 	List<OperationEntry> opsListInPlus = null;
 	List<OperationEntry> opsListInMinus = null;
@@ -33,9 +37,37 @@ public class MonthBillData {
 	public void setYear(String year) {
 		this.year = Integer.parseInt(year);
 	}
+	
+	/**
+	 * @param entry - opEntry to add and group by main title
+	 */
+	private void addSimilarOperation(OperationEntry entry)
+	{
+		String mainTitle = entry.getMainTitle();
+		Log.d(TAG, "op to add: "+ mainTitle);
+		
+		if (similarOperations.containsKey(mainTitle))
+		{
+			Log.d(TAG, mainTitle + " already exist");
+			similarOperations.get(mainTitle).add(entry);
+		}
+		else
+		{
+			Log.d(TAG, mainTitle + " is first time here, put to new list");
+			List<OperationEntry> lToAdd = new ArrayList<OperationEntry>();
+			lToAdd.add(entry);
+			similarOperations.put(mainTitle, lToAdd);
+		}
+	}
 
+	/**
+	 * @param opEntry to add
+	 * 
+	 * Additionally - group all entries sorting by similar title
+	 */
 	public void addOperationEntry(OperationEntry op) {
 		opsList.add(op);
+		addSimilarOperation(op);
 	}
 
 	public void setMonth(String month) {

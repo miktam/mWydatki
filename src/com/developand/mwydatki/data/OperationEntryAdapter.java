@@ -14,8 +14,8 @@ import com.developand.mwydatki.R;
 
 public class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 
-	private List<OperationEntry> items;
-	private Activity activity;
+	protected List<OperationEntry> items;
+	protected Activity activity;
 
 	public OperationEntryAdapter(Context context, int textViewResourceId,
 			List<OperationEntry> items, Activity ac) {

@@ -46,6 +46,11 @@ public class Main extends TabActivity {
 				.setContent(intent);
 		tabHost.addTab(spec);
 		
+		intent = new Intent().setClass(this, DetailedBillsView.class);
+		spec = tabHost.newTabSpec("minus").setIndicator("Details", null)
+				.setContent(intent);
+		tabHost.addTab(spec);
+			
 		tabHost.setCurrentTab(0);
 		}
 		catch (Exception e)
