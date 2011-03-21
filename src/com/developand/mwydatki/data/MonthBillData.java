@@ -22,7 +22,7 @@ public class MonthBillData {
 	Double saldoPoczatkowe;
 	Double saldoKoncowe;
 
-	List<OperationEntry> opsList = new ArrayList<OperationEntry>();
+	List<OperationEntry> opsList = null;
 
 	Map<String, List<OperationEntry>> similarOperations = new HashMap<String, List<OperationEntry>>();
 
@@ -49,11 +49,11 @@ public class MonthBillData {
 		Log.v(TAG, "op to add: " + mainTitle);
 
 		if (similarOperations.containsKey(mainTitle)) {
-			Log.i(TAG, mainTitle + " already exist");
+			Log.v(TAG, mainTitle + " already exist");
 			similarOperations.get(mainTitle).add(entry);
 		} else {
-			Log.i(TAG, mainTitle + " is first time here, put to new list");
-			Log.i(TAG, similarOperations.keySet().toString());
+			Log.v(TAG, mainTitle + " is first time here, put to new list");
+			Log.v(TAG, similarOperations.keySet().toString());
 			List<OperationEntry> lToAdd = new ArrayList<OperationEntry>();
 			lToAdd.add(entry);
 			similarOperations.put(mainTitle, lToAdd);
@@ -67,7 +67,12 @@ public class MonthBillData {
 	 *            Additionally - group all entries sorting by similar title
 	 */
 	public void addOperationEntry(OperationEntry op) {
+		
+		if (null == opsList)
+			opsList = new ArrayList<OperationEntry>();
+		
 		opsList.add(op);
+		Log.i(TAG, "add " + op);
 		addSimilarOperation(op);
 	}
 

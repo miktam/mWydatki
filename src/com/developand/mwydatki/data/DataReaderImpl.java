@@ -42,7 +42,7 @@ public class DataReaderImpl implements DataReader {
 	public Map<String, Spanned> readData(boolean allowCache) throws IOException {
 
 		Log.v(TAG, "starting reading file");
-		
+
 		if (allowCache && null != mapFileData)
 			return mapFileData;
 
@@ -154,6 +154,12 @@ public class DataReaderImpl implements DataReader {
 	public List<OperationEntry> getOperationsByIndex(Integer index,
 			OperationType op) {
 		MonthBillData mb = MonthBillData.getInstance();
+		
+		// optimize if index == 0
+		if (0 == index && (mb.getOperations() != null)) {
+			return mb.getOperationsByType(op);
+		}
+
 		mb.parseSource(mapFileData.values().toArray()[index].toString());
 		return mb.getOperationsByType(op);
 	}
