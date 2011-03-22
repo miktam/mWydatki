@@ -10,7 +10,7 @@
 		android:layout_alignParentBottom="true" android:layout_marginRight="1dip"
 		android:singleLine="true" android:ellipsize="marquee"
 		android:text="1000" 
-		android:textSize="10sp"
+		android:textSize="12sp"
 		android:textColor="#000000"/>
 
 	<TextView android:id="@+id/secondLine" 
@@ -21,7 +21,7 @@
 		android:layout_alignParentRight="true" android:singleLine="true"
 		android:ellipsize="marquee"
 		android:text="NAME OF PAYMENT" 
-		android:textSize="10sp"
+		android:textSize="12sp"
 		android:textColor="#000000"/>
 
 	<TextView android:id="@+id/opis"
