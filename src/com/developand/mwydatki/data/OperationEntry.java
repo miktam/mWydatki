@@ -21,42 +21,50 @@ public class OperationEntry {
 
 	@Override
 	public String toString() {
-		return getDataOperacjiFormatted() + "|" + getMainTitle() + "|" + getKwotaOperacji();
+		return (getDataKsiegowania() == null ? "TYP:"
+				: getDataKsiegowaniaFormatted() + "|")
+				+ getMainTitle()
+				+ "|"
+				+ (getDataKsiegowania() == null ? "SUMA: ":"") + getKwotaOperacji();
 	}
 
-	public OperationEntry(String mainTitle)
-	{
+	public OperationEntry(String mainTitle) {
 		isFaked = true;
 		this.mainTitle = mainTitle;
 	}
-	
+
 	public OperationEntry(String fullOpis, String mainTitle) {
-		
+
 		Log.v(TAG, "create:" + mainTitle + "|" + fullOpis);
-		
+
 		isFaked = false;
 
-		this.mainTitle = mainTitle;
-		
+		String[] all = mainTitle.split(" ");
+		StringBuffer clean = new StringBuffer();
+		for (int i = 1; i < all.length; i++)
+			clean.append(all[i] + " ");
+
+		this.mainTitle = clean.toString();
+
 		// split main title
 		String[] mainArray = mainTitle.split(" ");
 		String dataKsiegowania = "";
-		if (mainArray.length>1)
+		if (mainArray.length > 1)
 			dataKsiegowania = mainArray[0];
 
 		String[] ops = fullOpis.split(" ");
 
 		if (ops.length > 2) {
-			
+
 			String saldoPoOp = ops[ops.length - 2];
 			String kwota = ops[ops.length - 3];
 			String dataOperacji = ops[ops.length - 1];
-			
+
 			StringBuffer tagBuf = new StringBuffer(ops[0]);
 			tagBuf.append(" ");
 			tagBuf.append(ops[1]);
 			tagBuf.append(" ");
-			tagBuf.append(ops[2]);			
+			tagBuf.append(ops[2]);
 			this.tag = tagBuf.toString();
 
 			this.kwotaOperacji = Converter.toDouble(kwota);
@@ -71,23 +79,18 @@ public class OperationEntry {
 			}
 
 			this.opisOperacji = opis.toString();
-			
+
 			Log.v(TAG, "created entry: " + this.toString());
 		}
 
 	}
-	
-	public String getTag()
-	{
+
+	public String getTag() {
 		return tag;
 	}
 
 	public String getMainTitle() {
-		String[] all = mainTitle.split(" ");
-		StringBuffer clean = new StringBuffer();
-		for (int i = 1; i < all.length; i++)
-			clean.append(all[i] + " ");
-		return clean.toString();
+		return mainTitle;
 	}
 
 	public Calendar getDataOperacji() {
@@ -100,7 +103,7 @@ public class OperationEntry {
 				+ Converter.toMonth(getDataOperacji().get(Calendar.MONTH)));
 		return date.toString();
 	}
-	
+
 	public String getDataKsiegowaniaFormatted() {
 		StringBuilder date = new StringBuilder();
 		date.append(getDataKsiegowania().get(Calendar.DAY_OF_MONTH) + " "

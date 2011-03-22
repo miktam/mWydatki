@@ -8,8 +8,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
-import android.widget.Toast;
-
 
 public class Main extends TabActivity {
 	private static final String TAG = "Main";

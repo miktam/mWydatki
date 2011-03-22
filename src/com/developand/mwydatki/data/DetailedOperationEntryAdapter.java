@@ -32,40 +32,41 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 		}
 		Log.i(TAG, "size = " + items.size());
 		
-		OperationEntry o = items.get(position);
-		if (o != null) {
-			TextView saldo = (TextView) v.findViewById(R.id.icon);
-			TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
-			TextView descrOpOperation = (TextView) v.findViewById(R.id.opis);
-			TextView date = (TextView) v.findViewById(R.id.date);
+		OperationEntry opEntry = items.get(position);
+		if (opEntry != null) {
+			TextView saldoView = (TextView) v.findViewById(R.id.icon);
+			TextView mainTitleView = (TextView) v.findViewById(R.id.secondLine);
+			TextView descView = (TextView) v.findViewById(R.id.opis);
+			TextView dateView = (TextView) v.findViewById(R.id.date);
 
-			if (o.isFaked) {
+			if (opEntry.isFaked) {
 				// made invisible not needed fields
-				date.setVisibility(View.GONE);
-				descrOpOperation.setVisibility(View.GONE);
-				if (null != mainTitle) {
-					mainTitle.setText(o.getMainTitle());
-					mainTitle.setBackgroundColor(colorToShowGroup);
+				dateView.setVisibility(View.GONE);
+				descView.setVisibility(View.GONE);
+				if (null != mainTitleView) {
+					mainTitleView.setText(opEntry.getMainTitle());
+					mainTitleView.setBackgroundColor(colorToShowGroup);
 				}
-//				if (null != saldo) {
-//					saldo.setText("" + o.getKwotaOperacji());
-//					saldo.setBackgroundColor(colorToShowGroup);
-//				}
+				if (null != saldoView) {
+					saldoView.setText("" + opEntry.getKwotaOperacji());
+					saldoView.setBackgroundColor(colorToShowGroup);
+				}
 
 			} else {
 				
-				descrOpOperation.setVisibility(View.GONE);
-				if (null != mainTitle) {
-					mainTitle.setText(o.getTag());
+				descView.setVisibility(View.GONE);
+				dateView.setVisibility(View.GONE);
+				if (null != mainTitleView) {
+					mainTitleView.setText(opEntry.getTag());
 				}
 				
-				if (null != saldo) {
-					saldo.setText("" + o.getKwotaOperacji());
+				if (null != saldoView) {
+					saldoView.setText("" + opEntry.getKwotaOperacji());
 				}
 
-				if (null != date) {
-					date.setText(o.getDataKsiegowaniaFormatted());
-				}
+//				if (null != dateView) {
+//					dateView.setText(opEntry.getDataKsiegowaniaFormatted());
+//				}
 			}
 
 		}

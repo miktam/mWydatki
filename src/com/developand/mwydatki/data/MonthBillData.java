@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -113,7 +112,7 @@ public class MonthBillData {
 
 		setSaldoPoczatkowe(parseSaldoPoczatkowe(s));
 
-		Date firstDate = parseFirstOpDate(s);
+		parseFirstOpDate(s);
 
 		parseEachOperation(s);
 
@@ -154,6 +153,7 @@ public class MonthBillData {
 	 * 
 	 * @param firstDate
 	 */
+	@SuppressWarnings("unused")
 	@Deprecated
 	private void normalizeOperationDates(Date firstDate) {
 
@@ -189,6 +189,7 @@ public class MonthBillData {
 	 * @param s
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String parseSaldoKoncowe(Scanner s) {
 		String saldoKoncowe = null;
 		while (s.hasNextLine()) {
@@ -323,9 +324,17 @@ public class MonthBillData {
 			for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
 					.entrySet()) {
 				Log.d(TAG, entry.getKey());
-				OperationEntry op = new OperationEntry(entry.getKey());
+				OperationEntry summaryOp = new OperationEntry(entry.getKey());
 				Log.d(TAG, entry.getValue().toString());
-				opsListDetailed.add(op);
+				
+				// collect saldo
+				Double saldo = 0.0;
+				for (OperationEntry opEntry:entry.getValue())
+				{
+					saldo += opEntry.getKwotaOperacji();
+				}				
+				summaryOp.setKwotaOperacji(saldo);
+				opsListDetailed.add(summaryOp);
 				opsListDetailed.addAll(entry.getValue());
 			}
 		}

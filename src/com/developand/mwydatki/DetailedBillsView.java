@@ -7,12 +7,15 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 
 import com.developand.mwydatki.data.DetailedOperationEntryAdapter;
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.data.concurrent.DataDownloader;
+import com.developand.mwydatki.tools.ToastMaker;
 
 public class DetailedBillsView extends ListActivity {
 	
@@ -38,6 +41,13 @@ public class DetailedBillsView extends ListActivity {
 		dd.enableCache();
 		Thread thread = new Thread(null, dd, "parser");
 		thread.start();
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Log.v(TAG, "position = " + position);
+		OperationEntry opEntry = (OperationEntry) operations.toArray()[position];
+		ToastMaker.getToast(this, opEntry.toString());
 	}
 
 }
