@@ -4,18 +4,20 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.developand.mwydatki.R;
 
 public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 
-	private static final String TAG = DetailedOperationEntryAdapter.class.getName();
-	private int colorToShowGroup = android.R.color.darker_gray;
+	private static final String TAG = DetailedOperationEntryAdapter.class
+			.getName();
 
 	public DetailedOperationEntryAdapter(Context context,
 			int textViewResourceId, List<OperationEntry> items, Activity ac) {
@@ -31,7 +33,7 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 			v = vi.inflate(R.layout.detailed_view, null);
 		}
 		Log.i(TAG, "size = " + items.size());
-		
+
 		OperationEntry opEntry = items.get(position);
 		if (opEntry != null) {
 			TextView saldoView = (TextView) v.findViewById(R.id.icon);
@@ -39,34 +41,27 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 			TextView descView = (TextView) v.findViewById(R.id.opis);
 			TextView dateView = (TextView) v.findViewById(R.id.date);
 
+			RelativeLayout rel = (RelativeLayout) v
+					.findViewById(R.id.rel_layout);
+
 			if (opEntry.isFaked) {
 				// made invisible not needed fields
 				dateView.setVisibility(View.GONE);
 				descView.setVisibility(View.GONE);
-				if (null != mainTitleView) {
-					mainTitleView.setText(opEntry.getMainTitle());
-					mainTitleView.setBackgroundColor(colorToShowGroup);
-				}
-				if (null != saldoView) {
-					saldoView.setText("" + opEntry.getKwotaOperacji());
-					saldoView.setBackgroundColor(colorToShowGroup);
-				}
+
+				mainTitleView.setText(opEntry.getMainTitle());
+				saldoView.setText("" + opEntry.getKwotaOperacji());
+				rel.setBackgroundColor(Color.DKGRAY);
 
 			} else {
-				
+
 				descView.setVisibility(View.GONE);
 				dateView.setVisibility(View.GONE);
-				if (null != mainTitleView) {
-					mainTitleView.setText(opEntry.getTag());
-				}
-				
-				if (null != saldoView) {
-					saldoView.setText("" + opEntry.getKwotaOperacji());
-				}
 
-//				if (null != dateView) {
-//					dateView.setText(opEntry.getDataKsiegowaniaFormatted());
-//				}
+				mainTitleView.setText(opEntry.getTag());
+				saldoView.setText("" + opEntry.getKwotaOperacji());
+				rel.setBackgroundColor(Color.LTGRAY);
+
 			}
 
 		}

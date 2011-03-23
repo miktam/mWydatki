@@ -47,6 +47,8 @@ public class DetailedBillsView extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Log.v(TAG, "position = " + position);
 		OperationEntry opEntry = (OperationEntry) operations.toArray()[position];
+		// skip toast if it is summary
+		if (!opEntry.isFaked)
 		ToastMaker.getToast(this, opEntry.toString());
 	}
 

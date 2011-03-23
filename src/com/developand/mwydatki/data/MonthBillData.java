@@ -323,19 +323,22 @@ public class MonthBillData {
 			opsListDetailed = new ArrayList<OperationEntry>();
 			for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
 					.entrySet()) {
-				Log.d(TAG, entry.getKey());
-				OperationEntry summaryOp = new OperationEntry(entry.getKey());
-				Log.d(TAG, entry.getValue().toString());
+				String key = entry.getKey();
+				Log.d(TAG, key);
+				OperationEntry summaryOp = new OperationEntry(key);
+				
+				List<OperationEntry> values = entry.getValue();
+				Log.d(TAG, values.toString());
 				
 				// collect saldo
 				Double saldo = 0.0;
-				for (OperationEntry opEntry:entry.getValue())
+				for (OperationEntry opEntry:values)
 				{
 					saldo += opEntry.getKwotaOperacji();
 				}				
 				summaryOp.setKwotaOperacji(saldo);
 				opsListDetailed.add(summaryOp);
-				opsListDetailed.addAll(entry.getValue());
+				opsListDetailed.addAll(values);
 			}
 		}
 
