@@ -14,19 +14,21 @@ public class Main extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "Main.onCreate");
 		super.onCreate(savedInstanceState);
-		checkIfStartIsNeeded();
 		init();
 	}
 
 	@Override
 	protected void onStart() {
+		Log.d(TAG, "Main.onStart");
 		super.onStart();
-		checkIfStartIsNeeded();
 		init();
 	}
 
 	private void init() {
+		
+		Log.d(TAG, "Main.init");
 
 		Resources res = getResources(); // Resource object to get Drawables
 		TabHost tabHost = getTabHost(); // The activity TabHost
@@ -61,12 +63,5 @@ public class Main extends TabActivity {
 			ToastMaker.getToast(this, "Plik nie rozpoznany");
 			this.finish();
 		}
-	}
-
-	private void checkIfStartIsNeeded() {
-		if (!AttachmentReader.isFileExist()) {
-			Intent intent = new Intent(this, WelcomeDialog.class);
-			this.startActivity(intent);
-		}
-	}
+	}	
 }

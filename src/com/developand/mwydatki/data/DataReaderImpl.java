@@ -159,6 +159,10 @@ public class DataReaderImpl implements DataReader {
 		if (0 == index && (mb.getOperations() != null)) {
 			return mb.getOperationsByType(op);
 		}
+		
+		// handle empty directory
+		if (mapFileData.size() == 0)
+			return new ArrayList<OperationEntry>();
 
 		mb.parseSource(mapFileData.values().toArray()[index].toString());
 		return mb.getOperationsByType(op);

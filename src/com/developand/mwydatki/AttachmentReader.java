@@ -22,8 +22,11 @@ public class AttachmentReader extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		Log.d(TAG, "AttachmentReader.onCreate");
 
 		super.onCreate(savedInstanceState);
+		
 		readIntent(getIntent());
 
 		Uri path = getIntent().getData();
@@ -83,5 +86,4 @@ public class AttachmentReader extends Activity {
 		Log.d(TAG, "is file exist? " + fileExist);
 		return fileExist;		
 	}
-
 }
