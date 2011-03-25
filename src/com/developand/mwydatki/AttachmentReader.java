@@ -18,6 +18,7 @@ import android.util.Log;
 public class AttachmentReader extends Activity {
 
 	private static final String TAG = "AttachmentReader";
+	private static final String PATH_TO_FILE = "/sdcard/mwydatki/savedFromAttachment";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class AttachmentReader extends Activity {
 
 	private void saveFileInPeace(InputStream fis) {
 
-		File destinationFile = new File("/sdcard/mwydatki/savedFromAttachment");
+		File destinationFile = new File(PATH_TO_FILE);
 
 		try {
 			byte[] readData = new byte[1024];
@@ -73,6 +74,14 @@ public class AttachmentReader extends Activity {
 
 		String uri = intent.getData().toString();
 		Log.v(TAG, "uri = " + uri);
+	}
+	
+	public static boolean isFileExist()
+	{
+		File destinationFile = new File(PATH_TO_FILE);
+		boolean fileExist = destinationFile.exists();
+		Log.d(TAG, "is file exist? " + fileExist);
+		return fileExist;		
 	}
 
 }

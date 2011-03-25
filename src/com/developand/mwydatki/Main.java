@@ -1,7 +1,5 @@
 package com.developand.mwydatki;
 
-import com.developand.mwydatki.tools.ToastMaker;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,17 +7,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
 
+import com.developand.mwydatki.tools.ToastMaker;
+
 public class Main extends TabActivity {
 	private static final String TAG = Main.class.getName();
-
-	/** Called when the activity is first created. */
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		checkIfStartIsNeeded();
+		init();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		checkIfStartIsNeeded();
+		init();
+	}
+
+	private void init() {
 
 		Resources res = getResources(); // Resource object to get Drawables
 		TabHost tabHost = getTabHost(); // The activity TabHost
+		tabHost.clearAllTabs();
 		TabHost.TabSpec spec; // Resusable TabSpec for each tab
 		Intent intent; // Reusable Intent for each tab
 
@@ -47,8 +58,15 @@ public class Main extends TabActivity {
 			tabHost.setCurrentTab(0);
 		} catch (Exception e) {
 			Log.w(TAG, "really bad: " + e.getMessage());
-			ToastMaker.getToast(this, "File is corrupted?");
+			ToastMaker.getToast(this, "Plik nie rozpoznany");
 			this.finish();
+		}
+	}
+
+	private void checkIfStartIsNeeded() {
+		if (!AttachmentReader.isFileExist()) {
+			Intent intent = new Intent(this, WelcomeDialog.class);
+			this.startActivity(intent);
 		}
 	}
 }

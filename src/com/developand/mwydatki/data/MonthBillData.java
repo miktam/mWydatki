@@ -71,7 +71,7 @@ public class MonthBillData {
 			opsList = new ArrayList<OperationEntry>();
 		
 		opsList.add(op);
-		Log.i(TAG, "add " + op);
+		Log.v(TAG, "add " + op);
 		addSimilarOperation(op);
 	}
 
@@ -324,11 +324,11 @@ public class MonthBillData {
 			for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
 					.entrySet()) {
 				String key = entry.getKey();
-				Log.d(TAG, key);
+				Log.v(TAG, key);
 				OperationEntry summaryOp = new OperationEntry(key);
 				
 				List<OperationEntry> values = entry.getValue();
-				Log.d(TAG, values.toString());
+				Log.v(TAG, values.toString());
 				
 				// collect saldo
 				Double saldo = 0.0;

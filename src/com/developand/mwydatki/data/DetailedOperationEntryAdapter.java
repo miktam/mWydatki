@@ -32,7 +32,6 @@ public class DetailedOperationEntryAdapter extends OperationEntryAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = vi.inflate(R.layout.detailed_view, null);
 		}
-		Log.i(TAG, "size = " + items.size());
 
 		OperationEntry opEntry = items.get(position);
 		if (opEntry != null) {

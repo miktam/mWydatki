@@ -6,15 +6,11 @@ import java.util.List;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
 
 import com.developand.mwydatki.data.OperationEntry;
 import com.developand.mwydatki.data.OperationEntryAdapter;
 import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.data.concurrent.DataDownloader;
-import com.developand.mwydatki.tools.ToastMaker;
 
 public class AllExpensesView extends ListActivity {
 
@@ -39,12 +35,5 @@ public class AllExpensesView extends ListActivity {
 				OperationType.ALL, this, opEntryAdapter, progressDialog),
 				"parser");
 		thread.start();
-	}
-
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Log.v(TAG, "position = " + position);
-		Object obj = operations.toArray()[position];
-		ToastMaker.getToast(this, obj.toString());
 	}
 }
