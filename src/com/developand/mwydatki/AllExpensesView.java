@@ -14,8 +14,6 @@ import com.developand.mwydatki.data.concurrent.DataDownloader;
 
 public class AllExpensesView extends ListActivity {
 
-	private static final String TAG = AllExpensesView.class.getName();
-
 	private ProgressDialog progressDialog;
 	private List<OperationEntry> operations = null;
 	private OperationEntryAdapter opEntryAdapter;
