@@ -19,21 +19,16 @@ import android.util.Log;
 
 public class DataReaderImpl implements DataReader {
 
-	private static String directory = "/sdcard/mwydatki/";
+	private static String directorySdcard = "/sdcard/";
+	private static String directoryName = "mwydatki/";
+	private static String fullPathToDirectory = directorySdcard + directoryName;
 	private static String encoding = "iso-8859-2";
 
 	private static final String TAG = "DataReader";
 
 	private static Map<String, Spanned> mapFileData = null;
 
-	/**
-	 * @param path
-	 *            to directory with files
-	 */
-	public void setPath(String path) {
-		directory = path;
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -48,7 +43,10 @@ public class DataReaderImpl implements DataReader {
 
 		mapFileData = new HashMap<String, Spanned>();
 
-		File dir = new File(directory);
+		File dir = new File(fullPathToDirectory);
+		
+		// create dir if not created before
+		dir.mkdir();
 
 		// set of file
 		List<String> files = new ArrayList<String>();
@@ -59,7 +57,7 @@ public class DataReaderImpl implements DataReader {
 		for (String file : files) {
 			// File f = new File(directory, file);
 			Log.v(TAG, "found file:" + file);
-			Spanned parsedData = Html.fromHtml(read(directory + file));
+			Spanned parsedData = Html.fromHtml(read(fullPathToDirectory + file));
 			mapFileData.put(file, parsedData);
 			Log.v(TAG, "parsed this file");
 		}
@@ -70,7 +68,6 @@ public class DataReaderImpl implements DataReader {
 
 	}
 
-	// TODO add handling lack of access to sd card
 	private String read(String fileName) throws IOException {
 
 		StringBuilder text = new StringBuilder();
