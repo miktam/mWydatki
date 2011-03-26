@@ -1,5 +1,6 @@
 package com.developand.mwydatki.data;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import android.util.Log;
@@ -132,7 +133,7 @@ public class OperationEntry {
 	}
 
 	public Double getSaldoPoOperacji() {
-		return saldoPoOperacji;
+		return round(saldoPoOperacji);
 	}
 
 	public void setSaldoPoOperacji(Double saldoPoOperacji) {
@@ -140,7 +141,7 @@ public class OperationEntry {
 	}
 
 	public Double getKwotaOperacji() {
-		return kwotaOperacji;
+		return round(kwotaOperacji);
 	}
 
 	public void setKwotaOperacji(Double kwotaOperacji) {
@@ -154,5 +155,14 @@ public class OperationEntry {
 	public boolean isCategory() {
 		return isCategory;
 	}
+	
+	private static double round(double d) {
+	    BigDecimal bd = new BigDecimal(d);
+	    // two places after dot is enough
+	    int decimalPlaces = 2;
+	    bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+	    return bd.doubleValue();
+	}
+
 
 }
