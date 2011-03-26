@@ -14,22 +14,19 @@ public class Main extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d(TAG, "Main.onCreate");
+		Log.d(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		init();
 	}
 
 	@Override
 	protected void onStart() {
-		Log.d(TAG, "Main.onStart");
+		Log.d(TAG, "onStart");
 		super.onStart();
 		init();
 	}
 
 	private void init() {
-		
-		Log.d(TAG, "Main.init");
-
 		Resources res = getResources(); // Resource object to get Drawables
 		TabHost tabHost = getTabHost(); // The activity TabHost
 		tabHost.clearAllTabs();
@@ -63,5 +60,5 @@ public class Main extends TabActivity {
 			ToastMaker.getToast(this, "Plik nie rozpoznany");
 			this.finish();
 		}
-	}	
+	}
 }

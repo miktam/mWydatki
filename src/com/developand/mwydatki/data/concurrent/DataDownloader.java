@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.developand.mwydatki.AttachmentReader;
-import com.developand.mwydatki.WelcomeDialog;
+import com.developand.mwydatki.R;
 import com.developand.mwydatki.data.DataReader;
 import com.developand.mwydatki.data.DataReaderImpl;
 import com.developand.mwydatki.data.OperationEntry;
@@ -37,8 +41,24 @@ public class DataDownloader implements Runnable {
 		// if file not exist - show message that it is not OK
 		if (!AttachmentReader.isFileExist()) {
 
-			Intent intent = new Intent(activity, WelcomeDialog.class);
-			activity.startActivity(intent);
+			Dialog dialog = new Dialog(activity);
+			dialog.setContentView(R.layout.dialog);
+			dialog.setTitle(R.string.howto_label);
+			// do not let the user to go away
+			dialog.setCancelable(false);
+			TextView text = (TextView) dialog.findViewById(R.id.textViewDialog);
+			text.setText(R.string.howto);
+
+			Button openMailButton = (Button) dialog.findViewById(R.id.openMail);
+			openMailButton.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					// start main activity with asking to stop
+					Log.d(TAG, "go to main and die");
+					activity.finish();
+				}
+			});
+
+			dialog.show();
 		}
 	}
 
@@ -70,7 +90,7 @@ public class DataDownloader implements Runnable {
 		try {
 			dr.readData(cacheMode);
 			operations = dr.getOperationsByIndex(0, opType);
-			
+
 			if (null == operations || operations.size() == 0)
 				return;
 
