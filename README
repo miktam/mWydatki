@@ -1,0 +1,6 @@
+Aplikacja przetwarza wyci¹g wysy³any co miesi¹c przez mBank w formacie HTML.
+
+¯eby zaimportowaæ wyci¹g, znajdŸ email:
+mBank - elektroniczne zestawienie operacji za [miesiac] [rok], i otwórz za³¹cznik. Podczas otwierania wybierz z listy aplikacjê mWydatki.
+
+Nie musisz podawaæ ¿adnego has³a do mBanku. Aplikacja jest tylko i wy³¹cznie analizatorem wyci¹gów, i s³u¿y do analizy wydatków/przychodów.
