@@ -1,4 +1,4 @@
-package com.developand.mwydatki;
+package com.dev.mwydatki;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.developand.mwydatki.data.DetailedOperationEntryAdapter;
-import com.developand.mwydatki.data.OperationEntry;
-import com.developand.mwydatki.data.OperationEntryAdapter;
-import com.developand.mwydatki.data.common.OperationType;
-import com.developand.mwydatki.data.concurrent.DataDownloader;
-import com.developand.mwydatki.tools.ToastMaker;
+import com.dev.mwydatki.data.DetailedOperationEntryAdapter;
+import com.dev.mwydatki.data.OperationEntry;
+import com.dev.mwydatki.data.OperationEntryAdapter;
+import com.dev.mwydatki.data.common.OperationType;
+import com.dev.mwydatki.data.concurrent.DataDownloader;
+import com.dev.mwydatki.tools.ToastMaker;
 
 public class DetailedExpensesActivity extends ListActivity {
 	

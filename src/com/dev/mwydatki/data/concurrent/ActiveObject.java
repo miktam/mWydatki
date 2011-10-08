@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data.concurrent;
+package com.dev.mwydatki.data.concurrent;
 
 public abstract class ActiveObject implements Runnable {
 

@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data.common;
+package com.dev.mwydatki.data.common;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package com.developand.mwydatki;
+package com.dev.mwydatki;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
 
-import com.developand.mwydatki.tools.ToastMaker;
+import com.dev.mwydatki.tools.ToastMaker;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 

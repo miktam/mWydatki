@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data;
+package com.dev.mwydatki.data;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 import android.util.Log;
 
-import com.developand.mwydatki.data.common.OperationType;
-import com.developand.mwydatki.tools.Converter;
+import com.dev.mwydatki.data.common.OperationType;
+import com.dev.mwydatki.tools.Converter;
 
 public class MonthBillData {
 

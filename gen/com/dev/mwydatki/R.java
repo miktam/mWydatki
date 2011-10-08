@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.developand.mwydatki;
+package com.dev.mwydatki;
 
 public final class R {
     public static final class attr {

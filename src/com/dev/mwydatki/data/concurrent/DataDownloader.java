@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data.concurrent;
+package com.dev.mwydatki.data.concurrent;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.developand.mwydatki.AttachmentReader;
-import com.developand.mwydatki.R;
-import com.developand.mwydatki.data.DataReader;
-import com.developand.mwydatki.data.DataReaderImpl;
-import com.developand.mwydatki.data.OperationEntry;
-import com.developand.mwydatki.data.OperationEntryAdapter;
-import com.developand.mwydatki.data.common.OperationType;
+import com.dev.mwydatki.AttachmentReader;
+import com.dev.mwydatki.R;
+import com.dev.mwydatki.data.DataReader;
+import com.dev.mwydatki.data.DataReaderImpl;
+import com.dev.mwydatki.data.OperationEntry;
+import com.dev.mwydatki.data.OperationEntryAdapter;
+import com.dev.mwydatki.data.common.OperationType;
 
 public class DataDownloader implements Runnable {
 

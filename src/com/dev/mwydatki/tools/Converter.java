@@ -1,4 +1,4 @@
-package com.developand.mwydatki.tools;
+package com.dev.mwydatki.tools;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import android.util.Log;
 
-import com.developand.mwydatki.data.common.Month;
+import com.dev.mwydatki.data.common.Month;
 
 public class Converter {
 

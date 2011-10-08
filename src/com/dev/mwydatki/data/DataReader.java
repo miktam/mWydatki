@@ -1,11 +1,11 @@
-package com.developand.mwydatki.data;
+package com.dev.mwydatki.data;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.developand.mwydatki.data.common.OperationType;
+import com.dev.mwydatki.data.common.OperationType;
 
 import android.text.Spanned;
 

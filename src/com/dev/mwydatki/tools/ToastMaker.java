@@ -1,4 +1,4 @@
-package com.developand.mwydatki.tools;
+package com.dev.mwydatki.tools;
 
 import android.app.Activity;
 import android.widget.Toast;

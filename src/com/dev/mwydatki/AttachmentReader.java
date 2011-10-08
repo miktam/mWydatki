@@ -1,4 +1,4 @@
-package com.developand.mwydatki;
+package com.dev.mwydatki;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.developand.mwydatki.tools.ToastMaker;
+import com.dev.mwydatki.tools.ToastMaker;
 
 import android.app.Activity;
 import android.content.ContentResolver;

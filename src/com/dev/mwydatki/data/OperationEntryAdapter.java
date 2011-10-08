@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data;
+package com.dev.mwydatki.data;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.developand.mwydatki.R;
+import com.dev.mwydatki.R;
 
 public class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 

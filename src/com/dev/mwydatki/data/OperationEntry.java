@@ -1,11 +1,11 @@
-package com.developand.mwydatki.data;
+package com.dev.mwydatki.data;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 
 import android.util.Log;
 
-import com.developand.mwydatki.tools.Converter;
+import com.dev.mwydatki.tools.Converter;
 
 public class OperationEntry {
 

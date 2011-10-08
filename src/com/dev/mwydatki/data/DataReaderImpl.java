@@ -1,4 +1,4 @@
-package com.developand.mwydatki.data;
+package com.dev.mwydatki.data;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.developand.mwydatki.data.common.OperationType;
+import com.dev.mwydatki.data.common.OperationType;
 
 import android.text.Html;
 import android.text.Spanned;
@@ -32,7 +32,7 @@ public class DataReaderImpl implements DataReader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.developand.mwydatki.DataReader#readData()
+	 * @see com.dev.mwydatki.DataReader#readData()
 	 */
 	public Map<String, Spanned> readData(boolean allowCache) throws IOException {
 
