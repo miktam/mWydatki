@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.developand.mwydatki.AttachmentReader;
 import com.developand.mwydatki.R;
@@ -106,6 +107,9 @@ public class DataDownloader implements Runnable {
 					}
 					progressDialog.dismiss();
 					opEnAdapter.notifyDataSetChanged();
+					
+					
+					Toast.makeText(activity, "Dotknij wpis żeby zobaczyć szczegóły", Toast.LENGTH_SHORT).show();
 
 				}
 			});
