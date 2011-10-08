@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.TabHost;
 
 import com.developand.mwydatki.tools.ToastMaker;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 public class Main extends TabActivity {
 	private static final String TAG = Main.class.getName();
@@ -16,40 +18,34 @@ public class Main extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
-		init();
-	}
+		setContentView(R.layout.tab);
 
-	@Override
-	protected void onStart() {
-		Log.d(TAG, "onStart");
-		super.onStart();
-		init();
-	}
-
-	private void init() {
+		AdView adView = (AdView) this.findViewById(R.id.adView);
+		adView.loadAd(new AdRequest());
+		
 		Resources res = getResources(); // Resource object to get Drawables
 		TabHost tabHost = getTabHost(); // The activity TabHost
 		tabHost.clearAllTabs();
-		TabHost.TabSpec spec; // Resusable TabSpec for each tab
-		Intent intent; // Reusable Intent for each tab
+		TabHost.TabSpec spec;
+		Intent intent; 
 
 		try {
 
 			// Create an Intent to launch an Activity for the tab (to be reused)
-			intent = new Intent().setClass(this, AllExpensesView.class);
+			intent = new Intent().setClass(this, DetailedIncomeActivity.class);
 
 			// Initialize a TabSpec for each tab and add it to the TabHost
 			spec = tabHost
-					.newTabSpec("all")
-					.setIndicator("Wszystko",
+					.newTabSpec("income")
+					.setIndicator("Dochody",
 							res.getDrawable(R.drawable.tab_all))
 					.setContent(intent);
 			tabHost.addTab(spec);
 
-			intent = new Intent().setClass(this, DetailedBillsView.class);
+			intent = new Intent().setClass(this, DetailedExpensesActivity.class);
 			spec = tabHost
-					.newTabSpec("minus")
-					.setIndicator("Pogrupowane",
+					.newTabSpec("expenses")
+					.setIndicator("Wydatki",
 							res.getDrawable(R.drawable.tab_detailes))
 					.setContent(intent);
 			tabHost.addTab(spec);

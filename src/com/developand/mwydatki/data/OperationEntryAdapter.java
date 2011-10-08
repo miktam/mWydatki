@@ -28,29 +28,24 @@ public class OperationEntryAdapter extends ArrayAdapter<OperationEntry> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		if (v == null) {
-			LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater vi = (LayoutInflater) activity
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = vi.inflate(R.layout.detailed_view, null);
 		}
-		OperationEntry o = items.get(position);
-		if (o != null) {
-			TextView saldo = (TextView) v.findViewById(R.id.icon);
-			TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
-			TextView descrOpOperation = (TextView) v
-					.findViewById(R.id.opis);
-			TextView date = (TextView) v.findViewById(R.id.date);
+		OperationEntry opEntry = items.get(position);
+		
+		if (opEntry != null) {
 
-			if (null != mainTitle) {
-				mainTitle.setText(o.getMainTitle());
-			}
-			if (null != descrOpOperation) {
-				descrOpOperation.setText(o.getTag());
-			}
-			if (null != saldo) {
-				saldo.setText("" + o.getKwotaOperacji());
-			}
-
-			if (null != date) {
-				date.setText(o.getDataKsiegowaniaFormatted());
+			if (!opEntry.isFaked) {
+				TextView saldo = (TextView) v.findViewById(R.id.icon);
+				TextView mainTitle = (TextView) v.findViewById(R.id.secondLine);
+				TextView descrOpOperation = (TextView) v
+						.findViewById(R.id.opis);
+				TextView date = (TextView) v.findViewById(R.id.date);
+				mainTitle.setText(opEntry.getMainTitle());
+				descrOpOperation.setText(opEntry.getTag());
+				saldo.setText("" + opEntry.getKwotaOperacji());
+				date.setText(opEntry.getDataKsiegowaniaFormatted());
 			}
 
 		}

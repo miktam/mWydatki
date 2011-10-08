@@ -66,10 +66,10 @@ public class MonthBillData {
 	 *            Additionally - group all entries sorting by similar title
 	 */
 	public void addOperationEntry(OperationEntry op) {
-		
+
 		if (null == opsList)
 			opsList = new ArrayList<OperationEntry>();
-		
+
 		opsList.add(op);
 		Log.v(TAG, "add " + op);
 		addSimilarOperation(op);
@@ -300,43 +300,45 @@ public class MonthBillData {
 	public List<OperationEntry> getOperationsByType(OperationType opType) {
 		List<OperationEntry> toReturn = null;
 		switch (opType) {
-		case ALL:
-			toReturn = opsList;
+		case DETAILED_MINUS:
+			toReturn = getOperationsDetailed(opType);
 			break;
-		case MINUS:
-			toReturn = getOperationsInMinus();
-			break;
-		case PLUS:
-			toReturn = getOperationsInPlus();
-			break;
-		case DETAILED:
-			toReturn = getOperationsDetailed();
+		case DETAILED_PLUS:
+			toReturn = getOperationsDetailed(opType);
 			break;
 		}
+
 		return toReturn;
 	}
 
-	private List<OperationEntry> getOperationsDetailed() {
+	private List<OperationEntry> getOperationsDetailed(OperationType opType) {
+
+		Log.i(TAG, "op type: " + opType);
 
 		// have to make one dimentional list instead of matrix
-		if (null == opsListDetailed) {			
-			opsListDetailed = new ArrayList<OperationEntry>();
-			for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
-					.entrySet()) {
-				String key = entry.getKey();
-				Log.v(TAG, key);
-				OperationEntry summaryOp = new OperationEntry(key);
-				
-				List<OperationEntry> values = entry.getValue();
-				Log.v(TAG, values.toString());
-				
-				// collect saldo
-				Double saldo = 0.0;
-				for (OperationEntry opEntry:values)
-				{
-					saldo += opEntry.getKwotaOperacji();
-				}				
-				summaryOp.setKwotaOperacji(saldo);
+		opsListDetailed = new ArrayList<OperationEntry>();
+		for (Map.Entry<String, List<OperationEntry>> entry : similarOperations
+				.entrySet()) {
+			String key = entry.getKey();
+			Log.v(TAG, key);
+			OperationEntry summaryOp = new OperationEntry(key);
+
+			List<OperationEntry> values = entry.getValue();
+			Log.v(TAG, values.toString());
+
+			// collect saldo
+			Double saldo = 0.0;
+			for (OperationEntry opEntry : values) {
+				saldo += opEntry.getKwotaOperacji();
+			}
+			summaryOp.setKwotaOperacji(saldo);
+
+			if (opType.equals(OperationType.DETAILED_PLUS) && saldo > 0) {
+				opsListDetailed.add(summaryOp);
+				opsListDetailed.addAll(values);
+			}
+
+			if (opType.equals(OperationType.DETAILED_MINUS) && saldo < 0) {
 				opsListDetailed.add(summaryOp);
 				opsListDetailed.addAll(values);
 			}

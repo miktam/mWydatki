@@ -21,6 +21,7 @@ public final class R {
         public static final int tab_detailes=0x7f020007;
     }
     public static final class id {
+        public static final int adView=0x7f050009;
         public static final int date=0x7f050004;
         public static final int icon=0x7f050001;
         public static final int openMail=0x7f050007;
@@ -28,11 +29,13 @@ public final class R {
         public static final int rel_layout=0x7f050000;
         public static final int scrollView=0x7f050005;
         public static final int secondLine=0x7f050002;
+        public static final int tabLayout=0x7f050008;
         public static final int textViewDialog=0x7f050006;
     }
     public static final class layout {
         public static final int detailed_view=0x7f030000;
         public static final int dialog=0x7f030001;
+        public static final int tab=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

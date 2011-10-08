@@ -154,6 +154,7 @@ public class DataReaderImpl implements DataReader {
 		
 		// optimize if index == 0
 		if (0 == index && (mb.getOperations() != null)) {
+			Log.i(TAG, "optimalization!");
 			return mb.getOperationsByType(op);
 		}
 		

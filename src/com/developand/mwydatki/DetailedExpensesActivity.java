@@ -17,9 +17,9 @@ import com.developand.mwydatki.data.common.OperationType;
 import com.developand.mwydatki.data.concurrent.DataDownloader;
 import com.developand.mwydatki.tools.ToastMaker;
 
-public class DetailedBillsView extends ListActivity {
+public class DetailedExpensesActivity extends ListActivity {
 	
-	private static final String TAG = DetailedBillsView.class.getName();
+	private static final String TAG = DetailedExpensesActivity.class.getName();
 	private ProgressDialog progressDialog = null;
 	private List<OperationEntry> operations = null;
 	private OperationEntryAdapter opEntryAdapter;
@@ -33,10 +33,10 @@ public class DetailedBillsView extends ListActivity {
 				R.layout.detailed_view, operations, this);
 		setListAdapter(this.opEntryAdapter);
 
-		progressDialog = ProgressDialog.show(DetailedBillsView.this, "",
+		progressDialog = ProgressDialog.show(DetailedExpensesActivity.this, "",
 				this.getString(R.string.converting), true);
 
-		DataDownloader dd = new DataDownloader(operations, OperationType.DETAILED,
+		DataDownloader dd = new DataDownloader(operations, OperationType.DETAILED_MINUS,
 				this, opEntryAdapter, progressDialog);
 		dd.enableCache();
 		Thread thread = new Thread(null, dd, "parser");
