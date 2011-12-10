@@ -1,0 +1,7 @@
+bin/
+gen/
+.settings/
+
+# eclipse specific stuff
+.classpath
+.project
